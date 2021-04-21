@@ -9,4 +9,24 @@
         <createSequence sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
 
+    <changeSet id="21-04-21-15-30" author="me">
+        <createTable tableName="users">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activity" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
