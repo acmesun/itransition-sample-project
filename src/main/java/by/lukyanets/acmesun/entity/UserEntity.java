@@ -15,7 +15,7 @@ import java.util.Set;
 public class UserEntity {
     @Id
     @GeneratedValue
-    private Long Id;
+    private long Id;
     @Column
     private String name;
     @Column

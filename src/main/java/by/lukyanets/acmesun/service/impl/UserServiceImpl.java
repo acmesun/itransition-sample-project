@@ -1,7 +1,7 @@
 package by.lukyanets.acmesun.service.impl;
 
+import by.lukyanets.acmesun.dto.UserAdminDto;
 import by.lukyanets.acmesun.dto.UserDto;
-import by.lukyanets.acmesun.dto.UserLoginDto;
 import by.lukyanets.acmesun.dto.UserRegistrationDto;
 import by.lukyanets.acmesun.entity.UserEntity;
 import by.lukyanets.acmesun.repository.UserRepository;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 import static by.lukyanets.acmesun.entity.Roles.ADMIN;
 import static by.lukyanets.acmesun.entity.Roles.CLIENT;
@@ -68,6 +69,11 @@ public class UserServiceImpl implements UserService {
         var user = getUserEntity(userDto);
         user.setActivity(true);
         repo.save(user);
+    }
+
+    @Override
+    public List<UserAdminDto> allUsers() {
+        return repo.findAllByEmailOrderByNameAsc();
     }
 
     private UserEntity getUserEntity(UserDto userDto) {
