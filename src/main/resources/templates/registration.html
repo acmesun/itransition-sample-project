@@ -1,14 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
 <body>
-<main class="user-form">
-    <form>
+<div class="login-form">
+    <form th:action="@{/registration/}" th:object="${user}" method="post">
         <h1 class="h3 mb-3 fw-normal">Registration</h1>
+        <div class="alert-success" th:if="${user.message != null}" th:text="${user.message}"></div>
+        <div class="alert-danger" th:if="${user.error != null}" th:text="${user.error}"></div>
         <div class="form-floating my-2">
             <input type="text" class="form-control" placeholder="Name">
-            <label>Name</label>
+            <label for="floatingInput">Name</label>
         </div>
-
         <div class="form-floating my-2">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
@@ -17,8 +18,7 @@
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
-
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+        <a class="w-100 btn btn-lg btn-primary" type="button" th:href="@{/login}">Submit</a>
     </form>
-</main>
+</div>
 </body>
