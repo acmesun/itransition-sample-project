@@ -26,11 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity registerNewAccount(UserRegistrationDto userDto) {
-        if (!repo.existsByEmail(userDto.getEmail())) {
+        if (repo.existsByEmail(userDto.getEmail())) {
             throw new IllegalArgumentException("There is an account with that email address " + userDto.getEmail());
         }
 
         UserEntity userEntity = new UserEntity();
+        userEntity.setActivity(true);
         userEntity.setRole(CLIENT);
         userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userEntity.setEmail(userDto.getEmail());
@@ -72,8 +73,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserAdminDto> allUsers() {
-        return repo.findAllByEmailOrderByNameAsc();
+    public List<UserAdminDto> listOfAllUsers() {
+        return repo.findAllByOrderByNameAsc();
     }
 
     private UserEntity getUserEntity(UserDto userDto) {

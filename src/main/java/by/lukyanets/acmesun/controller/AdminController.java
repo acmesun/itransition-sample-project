@@ -19,34 +19,34 @@ public class AdminController {
 
     @GetMapping
     public ModelAndView displayAdminForm() {
-        return new ModelAndView("admin", "user", service.allUsers());
+        return new ModelAndView("admin", "users", service.listOfAllUsers());
     }
 
-    @PostMapping
+    @PostMapping("/delete")
     public ModelAndView adminDeleteUser(@ModelAttribute("user") UserDto dto) {
         service.deleteAccount(dto);
         return displayAdminForm();
     }
 
-    @PostMapping
+    @PostMapping("/block")
     public ModelAndView adminBlockUser(@ModelAttribute("user") UserDto dto) {
-       service.blockUser(dto);
-       return displayAdminForm();
+        service.blockUser(dto);
+        return displayAdminForm();
     }
 
-    @PostMapping
-    public ModelAndView adminUnblockUser(@ModelAttribute("user") UserDto dto){
+    @PostMapping("/unblock")
+    public ModelAndView adminUnblockUser(@ModelAttribute("user") UserDto dto) {
         service.unblockUser(dto);
         return displayAdminForm();
     }
 
-    @PostMapping
+    @PostMapping("/addRole")
     public ModelAndView addAdminRole(@ModelAttribute("user") UserDto dto) {
         service.addAdminRole(dto);
         return displayAdminForm();
     }
 
-    @PostMapping
+    @PostMapping("/deleteRole")
     public ModelAndView deleteAdminRole(@ModelAttribute("user") UserDto dto) {
         service.deleteAdminRole(dto);
         return displayAdminForm();

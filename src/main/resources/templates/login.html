@@ -7,11 +7,11 @@
         <div class="alert-success" th:if="${user.message != null}" th:text="${user.message}"></div>
         <div class="alert-danger" th:if="${user.error != null}" th:text="${user.error}"></div>
         <div class="form-floating my-2">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input th:field="${user.email}" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating my-2">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input th:field="${user.password}" type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
         <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign in</button>

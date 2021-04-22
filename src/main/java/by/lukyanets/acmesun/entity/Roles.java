@@ -1,7 +1,6 @@
 package by.lukyanets.acmesun.entity;
 
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;

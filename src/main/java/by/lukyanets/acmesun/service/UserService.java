@@ -20,6 +20,6 @@ public interface UserService {
 
     void unblockUser(UserDto userDto);
 
-    List<UserAdminDto> allUsers();
+    List<UserAdminDto> listOfAllUsers();
 
 }
