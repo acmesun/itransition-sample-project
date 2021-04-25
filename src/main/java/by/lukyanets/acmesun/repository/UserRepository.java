@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     boolean existsByEmail(String email);
 
-    List<UserAdminDto> findAllByOrderByNameAsc();
+    List<UserEntity> findAllByOrderByNameAsc();
 }

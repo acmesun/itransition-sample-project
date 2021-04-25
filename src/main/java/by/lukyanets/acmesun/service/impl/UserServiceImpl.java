@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static by.lukyanets.acmesun.entity.Roles.ADMIN;
 import static by.lukyanets.acmesun.entity.Roles.CLIENT;
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional
@@ -74,7 +76,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserAdminDto> listOfAllUsers() {
-        return repo.findAllByOrderByNameAsc();
+        return repo.findAllByOrderByNameAsc().stream()
+                .map(entity -> new UserAdminDto(entity.getId(), entity.getName(), entity.getEmail(), entity.getRole(), entity.isActivity()))
+                .collect(toList());
     }
 
     private UserEntity getUserEntity(UserDto userDto) {
