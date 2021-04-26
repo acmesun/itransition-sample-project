@@ -1,13 +1,13 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.dto.UserDto;
 import by.lukyanets.acmesun.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -16,40 +16,29 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
     private final UserService service;
 
-
     @GetMapping
     public ModelAndView displayAdminForm() {
         return new ModelAndView("admin", "users", service.listOfAllUsers());
     }
 
+    @PostMapping("/update")
+    public ModelAndView updateUser(
+            @RequestParam("email") String email,
+            @RequestParam(value = "role", required = false) String newRole,
+            @RequestParam(value = "activity", required = false) Boolean newActivity) {
+        service.updateUser(email, newRole, newActivity);
+        return isCurrent(email) ? new ModelAndView("redirect:/logout") : displayAdminForm();
+    }
+
     @PostMapping("/delete")
-    public ModelAndView adminDeleteUser(@ModelAttribute("user") UserDto dto) {
-        service.deleteAccount(dto);
-        return displayAdminForm();
+    public ModelAndView deleteUser(@RequestParam("email") String email) {
+        service.deleteAccount(email);
+        return isCurrent(email) ? new ModelAndView("redirect:/logout") : displayAdminForm();
     }
 
-    @PostMapping("/block")
-    public ModelAndView adminBlockUser(@ModelAttribute("user") UserDto dto) {
-        service.blockUser(dto);
-        return displayAdminForm();
-    }
 
-    @PostMapping("/unblock")
-    public ModelAndView adminUnblockUser(@ModelAttribute("user") UserDto dto) {
-        service.unblockUser(dto);
-        return displayAdminForm();
-    }
+    private boolean isCurrent(String email) {
+        return SecurityContextHolder.getContext().getAuthentication().getName().equals(email);
 
-    @PostMapping("/addRole")
-    public ModelAndView addAdminRole(@ModelAttribute("user") UserDto dto) {
-        service.addAdminRole(dto);
-        return displayAdminForm();
     }
-
-    @PostMapping("/deleteRole")
-    public ModelAndView deleteAdminRole(@ModelAttribute("user") UserDto dto) {
-        service.deleteAdminRole(dto);
-        return displayAdminForm();
-    }
-
 }

@@ -10,15 +10,9 @@ import java.util.List;
 public interface UserService {
     UserEntity registerNewAccount(UserRegistrationDto userDto);
 
-    void deleteAccount(UserDto userDto);
+    void deleteAccount(String email);
 
-    void addAdminRole(UserDto userDto);
-
-    void deleteAdminRole(UserDto userDto);
-
-    void blockUser(UserDto userDto);
-
-    void unblockUser(UserDto userDto);
+   void updateUser(String email, String newRole, Boolean newActivity);
 
     List<UserAdminDto> listOfAllUsers();
 

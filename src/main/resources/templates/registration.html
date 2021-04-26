@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
+<header th:include="navbar::navbar"></header>
 <body>
 <div class="login-form">
     <form th:action="@{/registration/}" th:object="${user}" method="post">
@@ -11,11 +12,13 @@
             <label for="floatingInput">Name</label>
         </div>
         <div class="form-floating my-2">
-            <input th:field="${user.email}" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input th:field="${user.email}" type="email" class="form-control" id="floatingInput"
+                   placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating my-2">
-            <input th:field="${user.password}" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input th:field="${user.password}" type="password" class="form-control" id="floatingPassword"
+                   placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>

@@ -42,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login?message=You have been logged out!")
                 .addLogoutHandler(new SecurityContextLogoutHandler())
                 .and()
                 .csrf().disable();

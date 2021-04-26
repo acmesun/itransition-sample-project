@@ -1,6 +1,5 @@
 package by.lukyanets.acmesun.repository;
 
-import by.lukyanets.acmesun.dto.UserAdminDto;
 import by.lukyanets.acmesun.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
