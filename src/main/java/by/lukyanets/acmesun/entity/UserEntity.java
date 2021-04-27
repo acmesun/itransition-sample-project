@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -28,7 +27,6 @@ public class UserEntity {
     private String role;
     @Column
     private boolean activity;
-
 
 
 }

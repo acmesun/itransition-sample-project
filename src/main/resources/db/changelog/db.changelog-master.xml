@@ -31,5 +31,48 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="27-04-21-14-20" author="me">
+        <createTable tableName="company_entity">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="company_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_description" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="target_amount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="27-04-21-14-52" author="me">
+        <createTable tableName="bonus_entity">
+            <column name="bonus_id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="company_id" type="bigint"/>
+            <column name="bonus_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="bonus_entity"
+                                 baseColumnNames="company_id"
+                                 constraintName="bonus_company_fk"
+                                 referencedTableName="company_entity"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -2,34 +2,49 @@
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
 <div class="container">
+    <form th:action="@{/companyreg/}" th:object="${company}" method="post">
     <div class="mb-3 my-2">
         <label for="companyreg" class="form-label">Company name</label>
-        <input type="text" class="form-control" id="companyreg" placeholder="Name">
+        <input th:field="${company.companyName}" type="text" class="form-control" id="companyreg" placeholder="Name">
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Describe your company</label>
-        <textarea class="form-control" id="description" rows="3"></textarea>
+        <textarea th:field="${company.companyDescription}" class="form-control" id="description" rows="3"></textarea>
     </div>
-    <select class="form-select" aria-label="subject">
-        <option selected>Choose subject of your company</option>
-        <option value="1">Education</option>
-        <option value="2">IT</option>
-        <option value="3">Medicine</option>
-        <option value="3">Politics</option>
-        <option value="3">Sport</option>
-        <option value="3">Help</option>
+    <select th:field="${company.subject}" class="form-select" aria-label="subject">
+        <option value=null selected>Choose subject of your company</option>
+        <option value="EDUCATION">Education</option>
+        <option value="IT">IT</option>
+        <option value="MEDICINE">Medicine</option>
+        <option value="POLITICS">Politics</option>
+        <option value="SPORT">Sport</option>
+        <option value="HELP">Help</option>
     </select>
     <div class="input-group my-2">
         <span class="input-group">Bonus</span>
-        <input type="text" aria-label="Bonus name" class="form-control" placeholder="Bonus name">
-        <input type="text" aria-label="Amount" class="form-control" placeholder="$$$">
-        <textarea class="form-control" aria-label="Description" placeholder="Bonus description"> </textarea>
+        <input type="text" th:field="${company.bonusList[0].bonusName}" aria-label="Bonus name" class="form-control" placeholder="Bonus name">
+        <input type="number" min="1" th:field="${company.bonusList[0].amount}" aria-label="Amount" class="form-control" placeholder="$$$">
+        <textarea class="form-control" th:field="${company.bonusList[0].description}" aria-label="Description" placeholder="Bonus description"> </textarea>
+    </div>
+    <div class="input-group my-2">
+        <span class="input-group">Bonus</span>
+        <input type="text" th:field="${company.bonusList[1].bonusName}" aria-label="Bonus name" class="form-control" placeholder="Bonus name">
+        <input type="number" min="1"  th:field="${company.bonusList[1].amount}" aria-label="Amount" class="form-control" placeholder="$$$">
+        <textarea class="form-control" th:field="${company.bonusList[1].description}" aria-label="Description" placeholder="Bonus description"> </textarea>
+    </div>
+    <div class="input-group my-2">
+        <span class="input-group">Bonus</span>
+        <input type="text" th:field="${company.bonusList[2].bonusName}" aria-label="Bonus name" class="form-control" placeholder="Bonus name">
+        <input type="number" min="1"  th:field="${company.bonusList[2].amount}" aria-label="Amount" class="form-control" placeholder="$$$">
+        <textarea class="form-control" th:field="${company.bonusList[2].description}" aria-label="Description" placeholder="Bonus description"> </textarea>
     </div>
     <div class="input-group">
-        <input type="text" aria-label="Target amount" class="form-control" placeholder="Target amount, $">
-        <input type="date" lang="en" aria-label="Expiration date" class="form-control" placeholder="Expiration date">
+        <input type="number" min="100" th:field="${company.targetAmount}" aria-label="Target amount" class="form-control" placeholder="Target amount, $">
+        <input type="date" th:field="${company.expirationDate}" aria-label="Expiration date" class="form-control" placeholder="Expiration date">
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-warning btn-lg mx-4 my-3" type="submit">Confirm</button>
     </div>
+    </form>
 </div>
+

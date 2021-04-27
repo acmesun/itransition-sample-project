@@ -1,26 +1,36 @@
-package by.lukyanets.acmesun.dto.company;
+package by.lukyanets.acmesun.entity;
 
-import by.lukyanets.acmesun.entity.BonusEntity;
-import by.lukyanets.acmesun.entity.Subject;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDto {
+@Table
+public class CompanyEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column
     private String companyName;
+    @Column
     private String companyDescription;
+    @Column
     private Subject subject;
+    @OneToMany(cascade = ALL)
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
     private List<BonusEntity> bonusList;
+    @Column
     private Integer targetAmount;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column
     private Date expirationDate;
+
 }
