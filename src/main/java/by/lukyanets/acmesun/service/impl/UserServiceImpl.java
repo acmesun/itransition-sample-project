@@ -1,15 +1,13 @@
 package by.lukyanets.acmesun.service.impl;
 
-import by.lukyanets.acmesun.dto.UserAdminDto;
-import by.lukyanets.acmesun.dto.UserRegistrationDto;
+import by.lukyanets.acmesun.dto.user.UserAdminDto;
+import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
 import by.lukyanets.acmesun.entity.UserEntity;
 import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.transaction.Transactional;
 import java.util.List;

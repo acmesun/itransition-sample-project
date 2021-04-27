@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head :: head"></head>
+<header th:include="navbar::navbar"></header>
+<div class="container">
+    <div class="mb-3 my-2">
+        <label for="companyreg" class="form-label">Company name</label>
+        <input type="text" class="form-control" id="companyreg" placeholder="Name">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Describe your company</label>
+        <textarea class="form-control" id="description" rows="3"></textarea>
+    </div>
+    <select class="form-select" aria-label="subject">
+        <option selected>Choose subject of your company</option>
+        <option value="1">Education</option>
+        <option value="2">IT</option>
+        <option value="3">Medicine</option>
+        <option value="3">Politics</option>
+        <option value="3">Sport</option>
+        <option value="3">Help</option>
+    </select>
+    <div class="input-group my-2">
+        <span class="input-group">Bonus</span>
+        <input type="text" aria-label="Bonus name" class="form-control" placeholder="Bonus name">
+        <input type="text" aria-label="Amount" class="form-control" placeholder="$$$">
+        <textarea class="form-control" aria-label="Description" placeholder="Bonus description"> </textarea>
+    </div>
+    <div class="input-group">
+        <input type="text" aria-label="Target amount" class="form-control" placeholder="Target amount, $">
+        <input type="date" lang="en" aria-label="Expiration date" class="form-control" placeholder="Expiration date">
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-warning btn-lg mx-4 my-3" type="submit">Confirm</button>
+    </div>
+</div>

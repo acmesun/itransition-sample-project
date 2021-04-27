@@ -1,4 +1,4 @@
-package by.lukyanets.acmesun.dto;
+package by.lukyanets.acmesun.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,13 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserAdminDto {
+@AllArgsConstructor
+public class UserDto {
     private long id;
     private String name;
     private String email;
     private String role;
     private boolean activity;
-
 }

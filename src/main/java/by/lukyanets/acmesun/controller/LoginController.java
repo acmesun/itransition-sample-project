@@ -1,6 +1,6 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.dto.UserLoginDto;
+import by.lukyanets.acmesun.dto.user.UserLoginDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

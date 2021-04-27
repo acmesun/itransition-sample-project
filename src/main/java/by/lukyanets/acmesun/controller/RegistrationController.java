@@ -1,6 +1,6 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.dto.UserRegistrationDto;
+import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
 import by.lukyanets.acmesun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

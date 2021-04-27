@@ -1,4 +1,4 @@
-package by.lukyanets.acmesun.dto;
+package by.lukyanets.acmesun.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

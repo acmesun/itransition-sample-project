@@ -1,8 +1,7 @@
 package by.lukyanets.acmesun.service;
 
-import by.lukyanets.acmesun.dto.UserAdminDto;
-import by.lukyanets.acmesun.dto.UserDto;
-import by.lukyanets.acmesun.dto.UserRegistrationDto;
+import by.lukyanets.acmesun.dto.user.UserAdminDto;
+import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
 import by.lukyanets.acmesun.entity.UserEntity;
 
 import java.util.List;

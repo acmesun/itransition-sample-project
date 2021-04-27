@@ -1,6 +1,6 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.dto.UserDto;
+import by.lukyanets.acmesun.dto.user.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,5 +19,10 @@ public class HomeController {
     @PostMapping("/toAdmin")
     public String toAdmin() {
         return "redirect:/admin";
+    }
+
+    @PostMapping("/toCompanyReg")
+    public String toCompanyReg() {
+        return "redirect:/companyreg";
     }
 }
