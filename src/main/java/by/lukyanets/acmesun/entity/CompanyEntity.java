@@ -22,6 +22,8 @@ public class CompanyEntity {
     @Column
     private String companyName;
     @Column
+    private String owner;
+    @Column
     private String companyDescription;
     @Column
     private Subject subject;

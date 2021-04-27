@@ -17,9 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 public class CompanyDto {
     private String companyName;
+    private String owner;
     private String companyDescription;
     private Subject subject;
-    private List<BonusEntity> bonusList;
+    private List<BonusDto> bonusList;
     private Integer targetAmount;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate;
