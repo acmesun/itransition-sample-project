@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class CompanyDto {
     private String companyName;
-    private String owner;
     private String companyDescription;
     private Subject subject;
     private List<BonusDto> bonusList;

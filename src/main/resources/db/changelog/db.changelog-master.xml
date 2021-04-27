@@ -31,7 +31,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="27-04-21-14-20" author="me">
+    <changeSet id="27-04-21-17-33" author="me">
         <createTable tableName="company_entity">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
@@ -51,10 +51,20 @@
             <column name="expiration_date" type="date">
                 <constraints nullable="false"/>
             </column>
+            <column name="owner_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+        <addForeignKeyConstraint baseTableName="company_entity"
+                                 baseColumnNames="owner_id"
+                                 constraintName="company_owner_fk"
+                                 referencedTableName="user_entity"
+                                 referencedColumnNames="id"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="27-04-21-14-52" author="me">
+    <changeSet id="27-04-21-17-39" author="me">
         <createTable tableName="bonus_entity">
             <column name="bonus_id" type="bigint">
                 <constraints primaryKey="true"/>

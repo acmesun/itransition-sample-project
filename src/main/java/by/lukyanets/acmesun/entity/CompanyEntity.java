@@ -22,8 +22,6 @@ public class CompanyEntity {
     @Column
     private String companyName;
     @Column
-    private String owner;
-    @Column
     private String companyDescription;
     @Column
     private Subject subject;
@@ -34,5 +32,8 @@ public class CompanyEntity {
     private Integer targetAmount;
     @Column
     private Date expirationDate;
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private UserEntity owner;
 
 }

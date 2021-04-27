@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +28,6 @@ public class UserEntity {
     private String role;
     @Column
     private boolean activity;
-
-
+    @OneToMany(mappedBy = "owner")
+    private List<CompanyEntity> companies;
 }

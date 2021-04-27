@@ -4,9 +4,12 @@ import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
 import by.lukyanets.acmesun.entity.BonusEntity;
 import by.lukyanets.acmesun.entity.CompanyEntity;
+import by.lukyanets.acmesun.entity.UserEntity;
 import by.lukyanets.acmesun.repository.CompanyRepository;
+import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
@@ -17,6 +20,7 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository repository;
+    private final UserRepository userRepo;
 
     @Override
     public CompanyEntity createNewCompany(CompanyDto companyDto) {
@@ -29,7 +33,10 @@ public class CompanyServiceImpl implements CompanyService {
         companyEntity.setCompanyDescription(companyDto.getCompanyDescription());
         companyEntity.setTargetAmount(companyDto.getTargetAmount());
         companyEntity.setExpirationDate(companyDto.getExpirationDate());
-
+        UserEntity owner = userRepo.findUserEntityByEmail(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        ).orElseThrow();
+        companyEntity.setOwner(owner);
         var bonusDtoList = companyDto.getBonusList();
         var bonusEntities = bonusDtoList.stream()
                 .map(this::mapBonusDtoToEntity)
