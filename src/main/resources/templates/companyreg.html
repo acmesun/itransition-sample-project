@@ -2,7 +2,7 @@
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
 <div class="container">
-    <form th:action="@{/companyreg/}" th:object="${company}" method="post">
+    <form th:action="@{/companyreg/}" th:object="${company}" method="post" enctype="multipart/form-data">
         <div class="mb-3 my-2">
             <label for="companyreg" class="form-label">Company name</label>
             <input th:field="${company.companyName}" type="text" class="form-control" id="companyreg"
@@ -56,11 +56,10 @@
                    placeholder="Expiration date">
         </div>
         <div class="input-group">
-            <input type="file" class="form-control my-2" id="file-load" aria-label="Upload">
-            <button class="btn btn-outline-info my-2" type="button" id="file-load-button">Upload</button>
+            <input type="file" multiple name="images" class="form-control my-2" id="file-load" aria-label="Upload">
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-warning btn-lg mx-4 my-2" type="button" th:href="@{/home}">Confirm</a>
+            <button class="btn btn-warning btn-lg mx-4 my-2" type="submit">Confirm</button>
         </div>
     </form>
 </div>

@@ -11,10 +11,9 @@ import by.lukyanets.acmesun.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -34,8 +33,15 @@ public class CompanyRegistrationController {
     }
 
     @PostMapping
-    public void companyRegistration(@ModelAttribute("company") CompanyDto companyDto) {
+    public void companyRegistration(
+            @ModelAttribute("company") CompanyDto companyDto,
+            @RequestParam("images") MultipartFile[] images
+    ) {
         service.createNewCompany(companyDto);
-
+    }
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
+        modelMap.addAttribute("file", file);
+        return "fileUploadView";
     }
 }

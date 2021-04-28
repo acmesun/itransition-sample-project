@@ -1,6 +1,5 @@
 package by.lukyanets.acmesun.dto.company;
 
-import by.lukyanets.acmesun.entity.BonusEntity;
 import by.lukyanets.acmesun.entity.Subject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
