@@ -3,10 +3,7 @@ package by.lukyanets.acmesun.service.impl;
 import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
-import by.lukyanets.acmesun.entity.BonusEntity;
-import by.lukyanets.acmesun.entity.CompanyEntity;
-import by.lukyanets.acmesun.entity.ImageEntity;
-import by.lukyanets.acmesun.entity.UserEntity;
+import by.lukyanets.acmesun.entity.*;
 import by.lukyanets.acmesun.repository.CompanyRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.CompanyService;
@@ -54,6 +51,20 @@ public class CompanyServiceImpl implements CompanyService {
                         entity.getTargetAmount(),
                         entity.getExpirationDate(),
                         entity.getOwner().getName())).collect(toList());
+    }
+
+    @Override
+    public List<CompanyDtoToList> listOfCompaniesBySubject(Subject subject) {
+        return repository.findAllBySubjectOrderByCompanyNameAsc(subject)
+                .stream()
+                .map(entity -> new CompanyDtoToList(
+                        entity.getId(),
+                        entity.getCompanyName(),
+                        entity.getSubject(),
+                        entity.getTargetAmount(),
+                        entity.getExpirationDate(),
+                        entity.getOwner().getName())).collect(toList());
+
     }
 
     private UserEntity findOwner() {

@@ -24,6 +24,7 @@ public class CompanyEntity {
     @Column
     private String companyDescription;
     @Column
+    @Enumerated(EnumType.STRING)
     private Subject subject;
     @OneToMany(cascade = ALL)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
