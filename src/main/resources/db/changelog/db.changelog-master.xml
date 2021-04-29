@@ -64,23 +64,44 @@
                                  onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="27-04-21-17-39" author="me">
+    <changeSet id="28-04-21-20-58" author="me">
         <createTable tableName="bonus_entity">
             <column name="bonus_id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
             <column name="company_id" type="bigint"/>
             <column name="bonus_name" type="text">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="amount" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
-            <column name="description" type="text"/>
+            <column name="description" type="text">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="bonus_entity"
                                  baseColumnNames="company_id"
                                  constraintName="bonus_company_fk"
+                                 referencedTableName="company_entity"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="28-04-21-22-44" author="me">
+        <createTable tableName="image_entity">
+            <column name="image_id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="company_id" type="bigint"/>
+            <column name="title" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="text">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="image_entity"
+                                 baseColumnNames="company_id"
+                                 constraintName="image_company_fk"
                                  referencedTableName="company_entity"
                                  referencedColumnNames="id"/>
     </changeSet>

@@ -35,5 +35,8 @@ public class CompanyEntity {
     @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private UserEntity owner;
+    @OneToMany(cascade = ALL)
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private List<ImageEntity> imageList;
 
 }

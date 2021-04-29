@@ -1,5 +1,6 @@
 package by.lukyanets.acmesun.dto.company;
 
+import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.Subject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,5 @@ public class CompanyDto {
     private Integer targetAmount;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate;
+    private List<ImageDto> imageList;
 }
