@@ -11,4 +11,5 @@ import java.util.List;
 public interface CompanyService {
     CompanyEntity createNewCompany(CompanyDto companyDto, MultipartFile[] images) throws IOException;
 
+
 }

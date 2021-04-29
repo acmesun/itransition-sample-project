@@ -21,4 +21,9 @@ public class ImageEntity {
     private String title;
     @Column
     private String url;
+
+    public ImageEntity(String title, String url) {
+        this.title = title;
+        this.url = url;
+    }
 }
