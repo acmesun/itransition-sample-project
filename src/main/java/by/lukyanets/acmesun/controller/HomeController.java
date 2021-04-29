@@ -25,4 +25,9 @@ public class HomeController {
     public String toCompanyReg() {
         return "redirect:/companyreg";
     }
+
+    @PostMapping("/toAllCompanies")
+    public String toAllCompanies() {
+        return "redirect:/companies";
+    }
 }

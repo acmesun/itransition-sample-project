@@ -14,9 +14,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyDtoToList {
+    private Long id;
     private String companyName;
     private Subject subject;
     private Integer targetAmount;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate;
+    private String owner;
 }

@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head :: head"></head>
+<header th:include="navbar::navbar"></header>
+<div class="container">
+    <style>
+        .table {
+
+            table-border-color-dark: blueviolet;
+            --bs-table-striped-color: #dcb1e9;
+            vertical-align: middle;
+        }
+    </style>
+    <table class="table table-bordered caption-top">
+        <caption>Companies</caption>
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Target amount</th>
+            <th scope="col">Expiration Date</th>
+            <th scope="col">Owner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="company : ${companies}">
+            <td th:text="${company.id}"></td>
+            <td th:text="${company.companyName}"></td>
+            <td th:text="${company.subject}"></td>
+            <td th:text="${company.targetAmount}"></td>
+            <td th:text="${company.expirationDate}"></td>
+            <td th:text="${company.owner}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

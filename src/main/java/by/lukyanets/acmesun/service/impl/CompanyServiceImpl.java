@@ -48,10 +48,12 @@ public class CompanyServiceImpl implements CompanyService {
         return repository.findAllByOrderByCompanyNameAsc()
                 .stream()
                 .map(entity -> new CompanyDtoToList(
+                        entity.getId(),
                         entity.getCompanyName(),
                         entity.getSubject(),
                         entity.getTargetAmount(),
-                        entity.getExpirationDate())).collect(toList());
+                        entity.getExpirationDate(),
+                        entity.getOwner().getName())).collect(toList());
     }
 
     private UserEntity findOwner() {

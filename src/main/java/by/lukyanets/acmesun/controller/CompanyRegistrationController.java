@@ -25,9 +25,6 @@ import java.util.Map;
 @RequestMapping("/companyreg")
 public class CompanyRegistrationController {
     private final CompanyService service;
-    private final CompanyRepository repo;
-    private final UserRepository userRepo;
-    private final Cloudinary cloudinary;
 
     @GetMapping
     public ModelAndView displayCompanyRegistrationPage() {
