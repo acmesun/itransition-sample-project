@@ -2,6 +2,7 @@ package by.lukyanets.acmesun.service.impl;
 
 import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
+import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
 import by.lukyanets.acmesun.entity.BonusEntity;
 import by.lukyanets.acmesun.entity.CompanyEntity;
 import by.lukyanets.acmesun.entity.ImageEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityExistsException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
@@ -39,6 +41,17 @@ public class CompanyServiceImpl implements CompanyService {
         companyEntity.setOwner(findOwner());
         companyEntity.setImageList(Arrays.stream(images).map(this::processImage).collect(toList()));
         return repository.save(companyEntity);
+    }
+
+    @Override
+    public List<CompanyDtoToList> listOfAllCompanies() {
+        return repository.findAllByOrderByCompanyNameAsc()
+                .stream()
+                .map(entity -> new CompanyDtoToList(
+                        entity.getCompanyName(),
+                        entity.getSubject(),
+                        entity.getTargetAmount(),
+                        entity.getExpirationDate())).collect(toList());
     }
 
     private UserEntity findOwner() {
