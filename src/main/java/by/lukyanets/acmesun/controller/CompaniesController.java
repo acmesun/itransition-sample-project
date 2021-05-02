@@ -5,6 +5,7 @@ import by.lukyanets.acmesun.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,4 +26,12 @@ public class CompaniesController {
             @RequestParam(value = "subject") Subject subject) {
         return new ModelAndView("companies", "companies", service.listOfCompaniesBySubject((subject)));
     }
+
+    /*@GetMapping("/id")
+    public ModelAndView displayCompanyByName(
+            @RequestParam(value = "name") String name) {
+        return new ModelAndView("redirect:/company", "companies", service.companyInfoByName(name));
+    }*/
+
 }
+

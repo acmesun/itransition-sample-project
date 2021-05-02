@@ -1,6 +1,7 @@
 package by.lukyanets.acmesun.service;
 
 import by.lukyanets.acmesun.dto.company.CompanyDto;
+import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
 import by.lukyanets.acmesun.dto.user.UserAdminDto;
 import by.lukyanets.acmesun.entity.CompanyEntity;
@@ -16,4 +17,6 @@ public interface CompanyService {
     List<CompanyDtoToList> listOfAllCompanies();
 
     List<CompanyDtoToList> listOfCompaniesBySubject(Subject subject);
+
+    CompanyDtoAllInfo companyInfoByName(String name);
 }

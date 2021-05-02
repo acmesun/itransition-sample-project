@@ -2,6 +2,7 @@ package by.lukyanets.acmesun.service.impl;
 
 import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
+import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
 import by.lukyanets.acmesun.entity.*;
 import by.lukyanets.acmesun.repository.CompanyRepository;
@@ -15,34 +16,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityExistsException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
-    private final CompanyRepository repository;
+    private final CompanyRepository companyRepo;
     private final UserRepository userRepo;
     private final Cloudinary cloudinary;
 
     @Override
     public CompanyEntity createNewCompany(CompanyDto companyDto, MultipartFile[] images) {
-        if (repository.existsByCompanyName(companyDto.getCompanyName())) {
+        if (companyRepo.existsByCompanyName(companyDto.getCompanyName())) {
             throw new EntityExistsException(companyDto.getCompanyName() + " already exist.");
         }
         var companyEntity = getDataFromDto(companyDto);
         companyEntity.setOwner(findOwner());
         companyEntity.setImageList(Arrays.stream(images).map(this::processImage).collect(toList()));
-        return repository.save(companyEntity);
+        return companyRepo.save(companyEntity);
     }
 
     @Override
     public List<CompanyDtoToList> listOfAllCompanies() {
-        return repository.findAllByOrderByCompanyNameAsc()
+        return companyRepo.findAllByOrderByCompanyNameAsc()
                 .stream()
                 .map(entity -> new CompanyDtoToList(
                         entity.getId(),
@@ -55,7 +53,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDtoToList> listOfCompaniesBySubject(Subject subject) {
-        return repository.findAllBySubjectOrderByCompanyNameAsc(subject)
+        return companyRepo.findAllBySubjectOrderByCompanyNameAsc(subject)
                 .stream()
                 .map(entity -> new CompanyDtoToList(
                         entity.getId(),
@@ -65,6 +63,30 @@ public class CompanyServiceImpl implements CompanyService {
                         entity.getExpirationDate(),
                         entity.getOwner().getName())).collect(toList());
 
+    }
+
+    @Override
+    public CompanyDtoAllInfo companyInfoByName(String name) {
+        CompanyEntity companyEntityById = companyRepo.findCompanyEntityByCompanyName(name);
+        CompanyDtoAllInfo companyDtoAllInfo = new CompanyDtoAllInfo();
+        companyDtoAllInfo.setId(companyEntityById.getId());
+        companyDtoAllInfo.setCompanyName(companyEntityById.getCompanyName());
+        companyDtoAllInfo.setCompanyDescription(companyEntityById.getCompanyDescription());
+        companyDtoAllInfo.setSubject(companyEntityById.getSubject());
+        List<BonusEntity> bonusList = companyEntityById.getBonusList();
+        List<BonusDto> bonusDtos = new ArrayList<>(bonusList.size());
+        for (BonusEntity bonusEntity : bonusList) {
+            BonusDto bonusDto = new BonusDto();
+            bonusDto.setBonusName(bonusEntity.getBonusName());
+            bonusDto.setAmount(bonusEntity.getAmount());
+            bonusDto.setDescription(bonusEntity.getDescription());
+            bonusDtos.add(bonusDto);
+        }
+        companyDtoAllInfo.setBonusList(bonusDtos);
+        companyDtoAllInfo.setTargetAmount(companyEntityById.getTargetAmount());
+        companyDtoAllInfo.setExpirationDate(companyEntityById.getExpirationDate());
+        companyDtoAllInfo.setOwner(companyDtoAllInfo.getOwner());
+        return companyDtoAllInfo;
     }
 
     private UserEntity findOwner() {

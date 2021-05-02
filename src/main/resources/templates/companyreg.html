@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
+<header th:include="subjectcompanynavbar::navbar-subject"></header>
 <div class="container">
     <form th:action="@{/companyreg/}" th:object="${company}" method="post" enctype="multipart/form-data">
         <div class="mb-3 my-2">

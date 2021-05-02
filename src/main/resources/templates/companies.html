@@ -12,7 +12,7 @@
             vertical-align: middle;
         }
     </style>
-    <table class="table table-bordered caption-top">
+    <table class="table table-bordered text-black-100 caption-top">
         <caption>Companies</caption>
         <thead class="table-dark">
         <tr>
@@ -27,7 +27,9 @@
         <tbody>
         <tr th:each="company : ${companies}">
             <td th:text="${company.id}"></td>
-            <td th:text="${company.companyName}"></td>
+            <td>
+                <a th:href="@{/company/name?text=__${company.companyName}__}" class="link link-success" th:text="${company.companyName}"></a>
+            </td>
             <td th:text="${company.subject}"></td>
             <td th:text="${company.targetAmount}"></td>
             <td th:text="${company.expirationDate}"></td>

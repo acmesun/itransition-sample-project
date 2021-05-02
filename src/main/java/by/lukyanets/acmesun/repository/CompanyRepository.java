@@ -13,4 +13,6 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
 
     List<CompanyEntity> findAllBySubjectOrderByCompanyNameAsc(Subject subject);
 
+    CompanyEntity findCompanyEntityByCompanyName(String name);
+
 }
