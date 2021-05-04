@@ -1,5 +1,6 @@
 package by.lukyanets.acmesun.service;
 
+import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
 import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;

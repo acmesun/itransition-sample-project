@@ -4,6 +4,7 @@ import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
 import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
+import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.*;
 import by.lukyanets.acmesun.repository.CompanyRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
@@ -85,7 +86,17 @@ public class CompanyServiceImpl implements CompanyService {
         companyDtoAllInfo.setBonusList(bonusDtos);
         companyDtoAllInfo.setTargetAmount(companyEntityById.getTargetAmount());
         companyDtoAllInfo.setExpirationDate(companyEntityById.getExpirationDate());
-        companyDtoAllInfo.setOwner(companyDtoAllInfo.getOwner());
+        companyDtoAllInfo.setOwner(companyEntityById.getOwner().getEmail());
+        List<ImageEntity> imageList = companyEntityById.getImageList();
+        List<ImageDto>imageDtos = new ArrayList<>(imageList.size());
+        for (ImageEntity imageEntity : imageList) {
+            ImageDto imageDto = new ImageDto();
+            imageDto.setTitle(imageEntity.getTitle());
+            imageDto.setUrl(imageEntity.getUrl());
+            imageDtos.add(imageDto);
+        }
+        companyDtoAllInfo.setImageList(imageDtos);
+
         return companyDtoAllInfo;
     }
 

@@ -2,24 +2,82 @@
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
 <header th:include="subjectcompanynavbar::navbar-subject"></header>
-<div id="carousel-images" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="..." class="d-block w-100" alt="...">
+<div class="container col-lg-10 mx-auto">
+    <p class="h1" th:text="${company.companyName}"></p>
+    <p class="lead text-muted">Owner</p>
+    <p class="lead text-muted" th:text="${company.owner}"></p>
+    <p class="lead text-muted">Description</p>
+    <p class="lead text-muted" th:text="${company.companyDescription}"></p>
+    <p class="lead text">Target amount, $</p>
+    <p class="lead text" th:text="${company.targetAmount}"></p>
+    <p>
+        <a href="#" class="btn btn-secondary my-2">Subscribe</a>
+    </p>
+    <p class="lead text">Bonuses</p>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header text-body py-3">
+                    <p class="lead text" th:text="${company.bonusList[0].bonusName}"></p>
+                    <p size="7" class="lead bigint" th:text="${company.bonusList[0].amount}"></p>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+                    <ul class="text-body">
+                        <li>
+                            <p class="lead text" th:text="${company.bonusList[0].description}"></p>
+                        </li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                </div>
+            </div>
         </div>
-        <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3">
+                    <p class="lead text" th:text="${company.bonusList[1].bonusName}"></p>
+                    <p size="10" class="lead bigint" th:text="${company.bonusList[1].amount}"></p>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+                    <ul class="text-body">
+                        <li>
+                            <p class="lead text" th:text="${company.bonusList[1].description}"></p>
+                        </li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                </div>
+            </div>
         </div>
-        <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3">
+                    <p class="lead text" th:text="${company.bonusList[2].bonusName}"></p>
+                    <p size="7" class="lead bigint" th:text="${company.bonusList[2].amount}"></p>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+                    <ul class="text-body">
+                        <li>
+                            <p class="lead text" th:text="${company.bonusList[2].description}"></p>
+                        </li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                </div>
+            </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+
+
+    <div class="container row row-cols-1 row-cols-md-3 mb-3">
+        <div class="row" th:each="image : ${company.imageList}">
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <img th:src="${image.url}" th:width="200" th:height="200" th:hspace="50" alt=""/>
+            </div>
+        </div>
+    </div>
+    <p>
+        <a href="#" class="btn btn-info my-2">Edit</a>
+        <a href="#" class="btn btn-danger my-2">Delete</a>
+    </p>
 </div>

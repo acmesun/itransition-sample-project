@@ -1,5 +1,6 @@
 package by.lukyanets.acmesun.dto.company;
 
+import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.Subject;
 import by.lukyanets.acmesun.entity.UserEntity;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class CompanyDtoAllInfo {
     private List<BonusDto> bonusList;
     private Integer targetAmount;
     private Date expirationDate;
-    private UserEntity owner;
+    private String owner;
+    private List<ImageDto> imageList;
 
 }
