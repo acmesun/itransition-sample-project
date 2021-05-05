@@ -27,4 +27,24 @@ public class UserController {
         service.deleteCompanyByName(name);
         return displayUserPage();
     }
+
+    @PostMapping("/toAdmin")
+    public String toAdmin() {
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/toCompanyReg")
+    public String toCompanyReg() {
+        return "redirect:/companyreg";
+    }
+
+    @PostMapping("/toAllCompanies")
+    public String toAllCompanies() {
+        return "redirect:/companies";
+    }
+
+    @PostMapping("/toMyPage")
+    public String toMyPage() {
+        return "redirect:/user";
+    }
 }

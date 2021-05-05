@@ -30,7 +30,7 @@ public class LoginController {
     public String login(@ModelAttribute("user") UserLoginDto dto) {
         var authenticate = provider.authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
-        return "redirect:/home";
+        return "redirect:/user";
     }
 
     @ExceptionHandler(value = {UsernameNotFoundException.class, BadCredentialsException.class})
