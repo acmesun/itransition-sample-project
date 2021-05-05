@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
+<body>
 <header th:include="navbar::navbar"></header>
 <header th:include="subjectcompanynavbar::navbar-subject"></header>
 <div class="container col-lg-10 mx-auto">
@@ -67,17 +68,17 @@
             </div>
         </div>
     </div>
-
-
-    <div class="container row row-cols-1 row-cols-md-3 mb-3">
-        <div class="row" th:each="image : ${company.imageList}">
-            <div class="col-md-3 col-sm-4 col-xs-6">
-                <img th:src="${image.url}" th:width="200" th:height="200" th:hspace="50" alt=""/>
-            </div>
-        </div>
-    </div>
     <p>
         <a href="#" class="btn btn-info my-2">Edit</a>
-        <a href="#" class="btn btn-danger my-2">Delete</a>
+        <a href="#" class="btn btn-danger my-2">Delete Company</a>
     </p>
 </div>
+<p class="lead text col-lg-10 mx-auto">Company images</p>
+<div class="container row col-lg-10 mx-auto row-cols-md-3">
+    <div class="row" th:each="image : ${company.imageList}">
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <img th:src="${image.url}" th:width="250" th:height="150" th:hspace="15" th:vspace="15" alt=""/>
+        </div>
+    </div>
+</div>
+</body>
