@@ -67,14 +67,27 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDtoAllInfo companyInfoByName(String name) {
-        CompanyEntity companyEntityById = companyRepo.findCompanyEntityByCompanyName(name);
+    public List<CompanyDtoAllInfo> companyInfoByOwner(String email) {
+        List<CompanyEntity> companyEntitiesByOwner = companyRepo.findAllByOwnerEmail(email);
+        List<CompanyDtoAllInfo> companyDtoAllInfos = new ArrayList<>();
+        for (CompanyEntity companyEntity : companyEntitiesByOwner) {
+            companyDtoAllInfos.add(fromCompanyEntityToCompanyDtoAllInfo(companyEntity));
+        }
+        return companyDtoAllInfos;
+    }
+
+    @Override
+    public void deleteCompanyByName(String name) {
+        companyRepo.delete(companyRepo.findCompanyEntityByCompanyName(name));
+    }
+
+    private CompanyDtoAllInfo fromCompanyEntityToCompanyDtoAllInfo(CompanyEntity companyEntity) {
         CompanyDtoAllInfo companyDtoAllInfo = new CompanyDtoAllInfo();
-        companyDtoAllInfo.setId(companyEntityById.getId());
-        companyDtoAllInfo.setCompanyName(companyEntityById.getCompanyName());
-        companyDtoAllInfo.setCompanyDescription(companyEntityById.getCompanyDescription());
-        companyDtoAllInfo.setSubject(companyEntityById.getSubject());
-        List<BonusEntity> bonusList = companyEntityById.getBonusList();
+        companyDtoAllInfo.setId(companyEntity.getId());
+        companyDtoAllInfo.setCompanyName(companyEntity.getCompanyName());
+        companyDtoAllInfo.setCompanyDescription(companyEntity.getCompanyDescription());
+        companyDtoAllInfo.setSubject(companyEntity.getSubject());
+        List<BonusEntity> bonusList = companyEntity.getBonusList();
         List<BonusDto> bonusDtos = new ArrayList<>(bonusList.size());
         for (BonusEntity bonusEntity : bonusList) {
             BonusDto bonusDto = new BonusDto();
@@ -84,11 +97,11 @@ public class CompanyServiceImpl implements CompanyService {
             bonusDtos.add(bonusDto);
         }
         companyDtoAllInfo.setBonusList(bonusDtos);
-        companyDtoAllInfo.setTargetAmount(companyEntityById.getTargetAmount());
-        companyDtoAllInfo.setExpirationDate(companyEntityById.getExpirationDate());
-        companyDtoAllInfo.setOwner(companyEntityById.getOwner().getEmail());
-        List<ImageEntity> imageList = companyEntityById.getImageList();
-        List<ImageDto>imageDtos = new ArrayList<>(imageList.size());
+        companyDtoAllInfo.setTargetAmount(companyEntity.getTargetAmount());
+        companyDtoAllInfo.setExpirationDate(companyEntity.getExpirationDate());
+        companyDtoAllInfo.setOwner(companyEntity.getOwner().getEmail());
+        List<ImageEntity> imageList = companyEntity.getImageList();
+        List<ImageDto> imageDtos = new ArrayList<>(imageList.size());
         for (ImageEntity imageEntity : imageList) {
             ImageDto imageDto = new ImageDto();
             imageDto.setTitle(imageEntity.getTitle());
@@ -96,8 +109,13 @@ public class CompanyServiceImpl implements CompanyService {
             imageDtos.add(imageDto);
         }
         companyDtoAllInfo.setImageList(imageDtos);
-
         return companyDtoAllInfo;
+    }
+
+    @Override
+    public CompanyDtoAllInfo companyInfoByName(String name) {
+        CompanyEntity companyEntityByName = companyRepo.findCompanyEntityByCompanyName(name);
+        return fromCompanyEntityToCompanyDtoAllInfo(companyEntityByName);
     }
 
     private UserEntity findOwner() {

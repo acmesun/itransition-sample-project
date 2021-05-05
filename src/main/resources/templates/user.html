@@ -2,7 +2,7 @@
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
 <header th:include="subjectcompanynavbar::navbar-subject"></header>
-
+<body>
 <div class="container">
     <style>
         .table {
@@ -21,21 +21,26 @@
             <th scope="col">Subject</th>
             <th scope="col">Target amount</th>
             <th scope="col">Expiration date</th>
-            <th scope="col">Owner</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="company : ${companies}">
             <td th:text="${company.id}"></td>
             <td>
-                <a th:href="@{/company/name?text=__${company.companyName}__}" class="link link-success" th:text="${company.companyName}"></a>
+                <a th:href="@{/company/name?text=__${company.companyName}__}" class="link link-success"
+                   th:text="${company.companyName}"></a>
             </td>
             <td th:text="${company.subject}"></td>
             <td th:text="${company.targetAmount}"></td>
             <td th:text="${company.expirationDate}"></td>
-            <td th:text="${company.owner}"></td>
+            <td>
+                <form th:action="@{/user/delete?name=__${company.companyName}__}" method="post">
+                    <button type="submit" class="btn btn-outline-warning">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
-</html>
+</body>

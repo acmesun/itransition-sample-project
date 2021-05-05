@@ -20,4 +20,8 @@ public interface CompanyService {
     List<CompanyDtoToList> listOfCompaniesBySubject(Subject subject);
 
     CompanyDtoAllInfo companyInfoByName(String name);
+
+    List<CompanyDtoAllInfo> companyInfoByOwner(String name);
+
+    void deleteCompanyByName(String name);
 }

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     @GetMapping
-    public ModelAndView displayHomePage(){
+    public ModelAndView displayHomePage() {
         return new ModelAndView("home", "user", new UserDto());
     }
 
@@ -29,5 +29,10 @@ public class HomeController {
     @PostMapping("/toAllCompanies")
     public String toAllCompanies() {
         return "redirect:/companies";
+    }
+
+    @PostMapping("/toMyPage")
+    public String toMyPage() {
+        return "redirect:/user";
     }
 }
