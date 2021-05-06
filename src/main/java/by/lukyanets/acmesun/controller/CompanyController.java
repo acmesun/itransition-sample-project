@@ -18,4 +18,5 @@ public class CompanyController {
             @RequestParam(value = "text") String name) {
         return new ModelAndView("company", "company", service.companyInfoByName(name));
     }
+
 }

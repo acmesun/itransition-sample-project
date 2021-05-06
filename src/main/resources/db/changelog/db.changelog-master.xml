@@ -105,5 +105,21 @@
                                  referencedTableName="company_entity"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="05-05-21-22-19" author="me">
+        <createTable tableName="buy_bonus_entity">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="company_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bonus_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
