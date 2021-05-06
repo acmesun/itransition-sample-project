@@ -105,21 +105,36 @@
                                  referencedTableName="company_entity"
                                  referencedColumnNames="id"/>
     </changeSet>
-    <changeSet id="05-05-21-22-19" author="me">
+
+    <changeSet id="06-05-21-22-19" author="me">
         <createTable tableName="buy_bonus_entity">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="company_name" type="text">
+            <column name="bonus_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="bonus_name" type="text">
+            <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="amount" type="bigint">
+            <column name="quantity" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <addForeignKeyConstraint baseTableName="buy_bonus_entity"
+                                 baseColumnNames="user_id"
+                                 constraintName="bb_bonus_user_fk"
+                                 referencedTableName="user_entity"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="buy_bonus_entity"
+                                 baseColumnNames="bonus_id"
+                                 constraintName="bb_bonus_bonus_fk"
+                                 referencedTableName="bonus_entity"
+                                 referencedColumnNames="bonus_id"/>
+        <addUniqueConstraint tableName="buy_bonus_entity"
+                             columnNames="user_id,bonus_id"
+                             constraintName="unique_bonus_to_user_constraint"/>
     </changeSet>
 
 </databaseChangeLog>

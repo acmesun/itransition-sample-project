@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -30,4 +31,6 @@ public class UserEntity {
     private boolean activity;
     @OneToMany(mappedBy = "owner")
     private List<CompanyEntity> companies;
+    @OneToMany(mappedBy = "user")
+    private Set<BuyBonusEntity> boughtBonuses;
 }

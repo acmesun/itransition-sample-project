@@ -6,13 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "bonus_entity")
 public class BonusEntity {
     @Id
     @GeneratedValue
@@ -23,4 +25,9 @@ public class BonusEntity {
     private Integer amount;
     @Column
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private CompanyEntity company;
+    @OneToMany(mappedBy = "bonus")
+    private Set<BuyBonusEntity> boughtBonuses;
 }
