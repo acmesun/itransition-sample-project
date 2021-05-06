@@ -1,6 +1,5 @@
 package by.lukyanets.acmesun.repository;
 
-import by.lukyanets.acmesun.entity.BonusEntity;
 import by.lukyanets.acmesun.entity.CompanyEntity;
 import by.lukyanets.acmesun.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
