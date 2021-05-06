@@ -29,8 +29,10 @@
                             <p class="lead text" th:text="${bonus.description}"></p>
                         </li>
                     </ul>
-                    <form th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&company=__${company.companyName}__}" method="post">
-                        <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                    <form th:id="${bonus.bonusName}" th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&company=__${company.companyName}__}" method="post">
+                        <button class="w-100 btn btn-lg btn-outline-primary"
+                                type="button"
+                                th:attr="onclick='confirmBonus(\'' + ${bonus.bonusName} + '\', \'Do you want to buy ' + ${bonus.bonusName} + '?\')'">Buy</button>
                     </form>
                 </div>
             </div>
@@ -46,4 +48,13 @@
     </div>
 </div>
 <div th:insert="footer :: footer"></div>
+<script type="text/javascript">
+    function confirmBonus(bonus, message) {
+        if (confirm(message)) {
+            document.getElementById(bonus).submit();
+        } else {
+            return false;
+        }
+    }
+</script>
 </body>
