@@ -16,51 +16,17 @@
     </p>
     <p class="lead text">Bonuses</p>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <div class="col">
+        <div class="col" th:each="bonus : ${company.bonusList}">
             <div class="card mb-4 rounded-3 shadow-sm border-primary">
                 <div class="card-header text-body py-3">
-                    <p class="lead text" th:text="${company.bonusList[0].bonusName}"></p>
-                    <p size="7" class="lead bigint" th:text="${company.bonusList[0].amount}"></p>
+                    <p class="lead text" th:text="${bonus.bonusName}"></p>
+                    <p size="7" class="lead bigint" th:text="${bonus.amount + '$'}"></p>
                 </div>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title"></h1>
                     <ul class="text-body">
                         <li>
-                            <p class="lead text" th:text="${company.bonusList[0].description}"></p>
-                        </li>
-                    </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                <div class="card-header py-3">
-                    <p class="lead text" th:text="${company.bonusList[1].bonusName}"></p>
-                    <p size="10" class="lead bigint" th:text="${company.bonusList[1].amount}"></p>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"></h1>
-                    <ul class="text-body">
-                        <li>
-                            <p class="lead text" th:text="${company.bonusList[1].description}"></p>
-                        </li>
-                    </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                <div class="card-header py-3">
-                    <p class="lead text" th:text="${company.bonusList[2].bonusName}"></p>
-                    <p size="7" class="lead bigint" th:text="${company.bonusList[2].amount}"></p>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"></h1>
-                    <ul class="text-body">
-                        <li>
-                            <p class="lead text" th:text="${company.bonusList[2].description}"></p>
+                            <p class="lead text" th:text="${bonus.description}"></p>
                         </li>
                     </ul>
                     <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
