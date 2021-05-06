@@ -29,7 +29,9 @@
                             <p class="lead text" th:text="${bonus.description}"></p>
                         </li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                    <form th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&company=__${company.companyName}__}" method="post">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                    </form>
                 </div>
             </div>
         </div>

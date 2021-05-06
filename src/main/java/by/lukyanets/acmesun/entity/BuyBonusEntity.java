@@ -25,4 +25,10 @@ public class BuyBonusEntity {
     private UserEntity user;
     @Column
     private Integer quantity;
+
+    public BuyBonusEntity(BonusEntity bonus, UserEntity currentUser) {
+        this.bonus = bonus;
+        this.user = currentUser;
+        this.quantity = 0;
+    }
 }
