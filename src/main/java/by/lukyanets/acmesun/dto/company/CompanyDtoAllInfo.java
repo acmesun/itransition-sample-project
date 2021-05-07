@@ -25,5 +25,6 @@ public class CompanyDtoAllInfo {
     private Date expirationDate;
     private String owner;
     private List<ImageDto> imageList;
+    private Integer currentAmount;
 
 }

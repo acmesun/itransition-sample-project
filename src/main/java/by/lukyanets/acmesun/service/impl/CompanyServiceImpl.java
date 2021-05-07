@@ -6,13 +6,13 @@ import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
 import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.*;
+import by.lukyanets.acmesun.repository.BuyBonusRepository;
 import by.lukyanets.acmesun.repository.CompanyRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.CompanyService;
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +25,7 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepo;
+    private final BuyBonusRepository bbonusRepo;
     private final UserRepository userRepo;
     private final CurrentUserService userService;
     private final Cloudinary cloudinary;
@@ -82,6 +83,7 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepo.delete(companyRepo.findCompanyEntityByCompanyName(name));
     }
 
+
     private CompanyDtoAllInfo fromCompanyEntityToCompanyDtoAllInfo(CompanyEntity companyEntity) {
         var companyDtoAllInfo = new CompanyDtoAllInfo();
         companyDtoAllInfo.setId(companyEntity.getId());
@@ -90,13 +92,22 @@ public class CompanyServiceImpl implements CompanyService {
         companyDtoAllInfo.setSubject(companyEntity.getSubject());
         var bonusList = companyEntity.getBonusList();
         List<BonusDto> bonusDtos = new ArrayList<>(bonusList.size());
+        Integer currentAmount = 0;
         for (BonusEntity bonusEntity : bonusList) {
             BonusDto bonusDto = new BonusDto();
             bonusDto.setBonusName(bonusEntity.getBonusName());
             bonusDto.setAmount(bonusEntity.getAmount());
             bonusDto.setDescription(bonusEntity.getDescription());
+            Set<BuyBonusEntity> boughtBonuses = bonusEntity.getBoughtBonuses();
+            for (BuyBonusEntity buyBonusEntity : boughtBonuses) {
+                Integer quantity = buyBonusEntity.getQuantity();
+                Integer amount = buyBonusEntity.getBonus().getAmount();
+                Integer sum = quantity * amount;
+                currentAmount = currentAmount + sum;
+            }
             bonusDtos.add(bonusDto);
         }
+        companyDtoAllInfo.setCurrentAmount(currentAmount);
         companyDtoAllInfo.setBonusList(bonusDtos);
         companyDtoAllInfo.setTargetAmount(companyEntity.getTargetAmount());
         companyDtoAllInfo.setExpirationDate(companyEntity.getExpirationDate());

@@ -9,8 +9,10 @@
     <p class="lead text-muted" th:text="${company.owner}"></p>
     <p class="lead text-muted">Description</p>
     <p class="lead text-muted" th:text="${company.companyDescription}"></p>
-    <p class="lead text">Target amount, $</p>
-    <p class="lead text" th:text="${company.targetAmount}"></p>
+    <p class="lead text">Target amount</p>
+    <p class="lead text" th:text="${company.targetAmount + '$'}"></p>
+    <p class="lead text-danger">General amount</p>
+    <p class="lead text" th:text="${company.currentAmount + '$'}"></p>
     <p>
         <a href="#" class="btn btn-secondary my-2">Subscribe</a>
     </p>

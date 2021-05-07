@@ -1,10 +1,8 @@
 package by.lukyanets.acmesun.service;
 
-import by.lukyanets.acmesun.dto.company.BonusDto;
 import by.lukyanets.acmesun.dto.company.CompanyDto;
 import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
-import by.lukyanets.acmesun.dto.user.UserAdminDto;
 import by.lukyanets.acmesun.entity.CompanyEntity;
 import by.lukyanets.acmesun.entity.Subject;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,4 +22,7 @@ public interface CompanyService {
     List<CompanyDtoAllInfo> companyInfoByOwner(String name);
 
     void deleteCompanyByName(String name);
+
+
+
 }
