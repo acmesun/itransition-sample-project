@@ -21,4 +21,5 @@ public class BonusController {
         buyBonusService.saveBoughtBonus(bonusName, companyName);
         return "redirect:/user";
     }
+
 }

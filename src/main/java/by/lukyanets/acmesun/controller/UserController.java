@@ -1,8 +1,9 @@
 package by.lukyanets.acmesun.controller;
 
+import by.lukyanets.acmesun.service.BuyBonusService;
 import by.lukyanets.acmesun.service.CompanyService;
+import by.lukyanets.acmesun.service.impl.CurrentUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,16 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final CompanyService service;
+    private final CurrentUserService userService;
+    private final BuyBonusService bonusService;
 
     @GetMapping
     public ModelAndView displayUserPage() {
-        String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return new ModelAndView("user", "companies", service.companyInfoByOwner(currentEmail));
+        var currentEmail = userService.getCurrentUser().getEmail();
+        return new ModelAndView("user",
+                Map.of(
+                        "bonuses", bonusService.findAllBBDtosByUser(currentEmail),
+                        "companies", service.companyInfoByOwner(currentEmail))
+        );
     }
 
     @PostMapping("/delete")

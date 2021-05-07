@@ -1,6 +1,7 @@
 package by.lukyanets.acmesun.controller;
 
 import by.lukyanets.acmesun.service.UserService;
+import by.lukyanets.acmesun.service.impl.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService service;
+    private final CurrentUserService userService;
 
     @GetMapping
     public ModelAndView displayAdminForm() {
@@ -38,7 +40,7 @@ public class AdminController {
 
 
     private boolean isCurrent(String email) {
-        return SecurityContextHolder.getContext().getAuthentication().getName().equals(email);
+        return userService.getCurrentUser().getName().equals(email);
 
     }
 }
