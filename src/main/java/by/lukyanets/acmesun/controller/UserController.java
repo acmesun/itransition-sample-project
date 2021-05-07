@@ -56,4 +56,9 @@ public class UserController {
     public String toMyPage() {
         return "redirect:/user";
     }
+
+    @GetMapping("/notadmin")
+    public String notAdmin() {
+        return "notadmin";
+    }
 }

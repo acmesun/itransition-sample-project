@@ -45,6 +45,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?message=You have been logged out!")
                 .addLogoutHandler(new SecurityContextLogoutHandler())
                 .and()
+                .exceptionHandling()
+                .accessDeniedPage("/user/notadmin")
+                .and()
                 .csrf().disable();
     }
 

@@ -5,10 +5,7 @@ import by.lukyanets.acmesun.service.impl.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -37,7 +34,6 @@ public class AdminController {
         service.deleteAccount(email);
         return isCurrent(email) ? new ModelAndView("redirect:/logout") : displayAdminForm();
     }
-
 
     private boolean isCurrent(String email) {
         return userService.getCurrentUser().getName().equals(email);

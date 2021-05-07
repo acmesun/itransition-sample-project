@@ -22,7 +22,7 @@ public class UserDetailsByEmailService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("There is no user with such email " + email));
 
         return new org.springframework.security.core.userdetails.User(
-                userEntity.getName(),
+                userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.isActivity(),
                 true,
