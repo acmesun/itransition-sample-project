@@ -23,6 +23,8 @@ public interface CompanyService {
 
     void deleteCompanyByName(String name);
 
+    boolean isCompanyHasBoughtBonuses(String name);
+
 
 
 }

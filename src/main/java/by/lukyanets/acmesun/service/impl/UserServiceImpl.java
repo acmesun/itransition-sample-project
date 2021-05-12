@@ -3,7 +3,9 @@ package by.lukyanets.acmesun.service.impl;
 import by.lukyanets.acmesun.dto.user.UserAdminDto;
 import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
 import by.lukyanets.acmesun.entity.UserEntity;
+import by.lukyanets.acmesun.repository.CompanyRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
+import by.lukyanets.acmesun.service.CompanyService;
 import by.lukyanets.acmesun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,11 +22,13 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository repo;
+    private final UserRepository userRepository;
+    private final CompanyRepository companyRepo;
+    private final CurrentUserService service;
 
     @Override
     public UserEntity registerNewAccount(UserRegistrationDto userDto) {
-        if (repo.existsByEmail(userDto.getEmail())) {
+        if (userRepository.existsByEmail(userDto.getEmail())) {
             throw new IllegalArgumentException("There is an account with that email address " + userDto.getEmail());
         }
 
@@ -34,17 +38,17 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userEntity.setEmail(userDto.getEmail());
         userEntity.setName(userDto.getName());
-        return repo.save(userEntity);
+        return userRepository.save(userEntity);
     }
 
     @Override
     public void deleteAccount(String email) {
-        repo.findUserEntityByEmail(email).ifPresent(repo::delete);
+        userRepository.findUserEntityByEmail(email).ifPresent(userRepository::delete);
     }
 
     @Override
     public void updateUser(String email, String newRole, Boolean newActivity) {
-        repo.findUserEntityByEmail(email)
+        userRepository.findUserEntityByEmail(email)
                 .map(userEntity -> {
                     if (newRole != null) {
                         userEntity.setRole(newRole);
@@ -53,15 +57,18 @@ public class UserServiceImpl implements UserService {
                         userEntity.setActivity(newActivity);
                     }
                     return userEntity;
-                }).ifPresent(repo::save);
+                }).ifPresent(userRepository::save);
     }
 
     @Override
     public List<UserAdminDto> listOfAllUsers() {
-        return repo.findAllByOrderByNameAsc().stream()
+        return userRepository.findAllByOrderByNameAsc().stream()
                 .map(entity -> new UserAdminDto(entity.getId(), entity.getName(), entity.getEmail(), entity.getRole(), entity.isActivity()))
                 .collect(toList());
     }
 
-
+    @Override
+    public boolean isUserHasCompanies(String email) {
+        return companyRepo.findAllByOwnerEmail(email).size() >= 1;
+    }
 }

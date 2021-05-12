@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-    private final CompanyService service;
+    private final CompanyService companyService;
     private final CurrentUserService userService;
     private final BuyBonusService bonusService;
 
@@ -27,14 +27,18 @@ public class UserController {
         return new ModelAndView("user",
                 Map.of(
                         "bonuses", bonusService.findAllBBDtosByUser(currentEmail),
-                        "companies", service.companyInfoByOwner(currentEmail))
+                        "companies", companyService.companyInfoByOwner(currentEmail))
         );
     }
 
     @PostMapping("/delete")
     public ModelAndView deleteCompany(@RequestParam("name") String name) {
-        service.deleteCompanyByName(name);
-        return displayUserPage();
+        if (companyService.isCompanyHasBoughtBonuses(name)) {
+            return new ModelAndView("redirect:/user/notdeletecompany");
+        } else {
+            companyService.deleteCompanyByName(name);
+            return displayUserPage();
+        }
     }
 
     @PostMapping("/toAdmin")
@@ -60,5 +64,10 @@ public class UserController {
     @GetMapping("/notadmin")
     public String notAdmin() {
         return "notadmin";
+    }
+
+    @GetMapping("/notdeletecompany")
+    public String notDeleteCompany() {
+        return "notdeletecompany";
     }
 }

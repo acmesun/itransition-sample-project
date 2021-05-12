@@ -11,8 +11,10 @@ public interface UserService {
 
     void deleteAccount(String email);
 
-   void updateUser(String email, String newRole, Boolean newActivity);
+    void updateUser(String email, String newRole, Boolean newActivity);
 
     List<UserAdminDto> listOfAllUsers();
+
+    boolean isUserHasCompanies(String email);
 
 }

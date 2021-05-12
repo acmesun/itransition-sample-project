@@ -83,6 +83,20 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepo.delete(companyRepo.findCompanyEntityByCompanyName(name));
     }
 
+    @Override
+    public boolean isCompanyHasBoughtBonuses(String name) {
+        CompanyEntity companyEntityByCompanyName = companyRepo.findCompanyEntityByCompanyName(name);
+        List<BonusEntity> bonusList = companyEntityByCompanyName.getBonusList();
+        int counter = 0;
+        for (BonusEntity bonusEntity : bonusList) {
+            Set<BuyBonusEntity> boughtBonuses = bonusEntity.getBoughtBonuses();
+            if (boughtBonuses.size() >= 1) {
+                counter++;
+            }
+        }
+        return counter >= 1;
+    }
+
 
     private CompanyDtoAllInfo fromCompanyEntityToCompanyDtoAllInfo(CompanyEntity companyEntity) {
         var companyDtoAllInfo = new CompanyDtoAllInfo();
