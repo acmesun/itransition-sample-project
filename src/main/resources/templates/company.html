@@ -13,9 +13,9 @@
     <p class="lead text" th:text="${company.targetAmount + '$'}"></p>
     <p class="lead text-danger">General amount</p>
     <p class="lead text" th:text="${company.currentAmount + '$'}"></p>
-    <p>
-        <a href="#" class="btn btn-secondary my-2">Subscribe</a>
-    </p>
+    <form th:action="@{/user/subscribe?name=__${company.companyName}__}" th:object="${company}" th:method="post" >
+        <button type="submit" class="btn btn-secondary my-2">Subscribe</button>
+    </form>
     <p class="lead text">Bonuses</p>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
         <div class="col" th:each="bonus : ${company.bonusList}">
@@ -31,10 +31,14 @@
                             <p class="lead text" th:text="${bonus.description}"></p>
                         </li>
                     </ul>
-                    <form th:id="${bonus.bonusName}" th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&company=__${company.companyName}__}" method="post">
+                    <form th:id="${bonus.bonusName}"
+                          th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&company=__${company.companyName}__}"
+                          method="post">
                         <button class="w-100 btn btn-lg btn-outline-primary"
                                 type="button"
-                                th:attr="onclick='confirmBonus(\'' + ${bonus.bonusName} + '\', \'Do you want to buy ' + ${bonus.bonusName} + '?\')'">Buy</button>
+                                th:attr="onclick='confirmBonus(\'' + ${bonus.bonusName} + '\', \'Do you want to buy ' + ${bonus.bonusName} + '?\')'">
+                            Buy
+                        </button>
                     </form>
                 </div>
             </div>

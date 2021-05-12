@@ -6,8 +6,8 @@ import by.lukyanets.acmesun.dto.company.CompanyDtoAllInfo;
 import by.lukyanets.acmesun.dto.company.CompanyDtoToList;
 import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.*;
-import by.lukyanets.acmesun.repository.BuyBonusRepository;
 import by.lukyanets.acmesun.repository.CompanyRepository;
+import by.lukyanets.acmesun.repository.CompanySubscriptionRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.CompanyService;
 import com.cloudinary.Cloudinary;
@@ -26,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepo;
     private final UserRepository userRepo;
+    private final CompanySubscriptionRepository subscriptionRepo;
     private final CurrentUserService userService;
     private final Cloudinary cloudinary;
 
@@ -94,12 +95,6 @@ public class CompanyServiceImpl implements CompanyService {
             }
         }
         return counter >= 1;
-    }
-
-    @Override
-    public void subscribeToTheCompany(String name) {
-        CompanyEntity companyEntity = companyRepo.findCompanyEntityByCompanyName(name);
-
     }
 
 

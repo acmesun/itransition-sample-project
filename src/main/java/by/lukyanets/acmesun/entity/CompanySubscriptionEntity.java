@@ -21,4 +21,9 @@ public class CompanySubscriptionEntity {
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private CompanyEntity companyEntity;
+
+    public CompanySubscriptionEntity(UserEntity user, CompanyEntity companyEntity) {
+        this.user = user;
+        this.companyEntity = companyEntity;
+    }
 }

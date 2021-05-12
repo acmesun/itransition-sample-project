@@ -2,6 +2,7 @@ package by.lukyanets.acmesun.controller;
 
 import by.lukyanets.acmesun.service.BuyBonusService;
 import by.lukyanets.acmesun.service.CompanyService;
+import by.lukyanets.acmesun.service.impl.CompanySubscriptionService;
 import by.lukyanets.acmesun.service.impl.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class UserController {
     private final CompanyService companyService;
     private final CurrentUserService userService;
     private final BuyBonusService bonusService;
+    private final CompanySubscriptionService subscriptionService;
 
     @GetMapping
     public ModelAndView displayUserPage() {
@@ -27,7 +29,8 @@ public class UserController {
         return new ModelAndView("user",
                 Map.of(
                         "bonuses", bonusService.findAllBBDtosByUser(currentEmail),
-                        "companies", companyService.companyInfoByOwner(currentEmail))
+                        "companies", companyService.companyInfoByOwner(currentEmail),
+                        "company", subscriptionService.findAllSubscriptions(currentEmail))
         );
     }
 
@@ -43,7 +46,7 @@ public class UserController {
 
     @PostMapping("/subscribe")
     public ModelAndView subscribe(@RequestParam("name") String name) {
-        companyService.subscribeToTheCompany(name);
+        subscriptionService.subscribe(name);
         return displayUserPage();
     }
 
