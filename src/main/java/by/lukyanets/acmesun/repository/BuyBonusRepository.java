@@ -8,4 +8,10 @@ import java.util.Optional;
 
 public interface BuyBonusRepository extends JpaRepository<BuyBonusEntity, Long> {
     List<BuyBonusEntity> findBuyBonusEntitiesByUserEmail(String userEmail);
+
+    Optional<BuyBonusEntity> findByBonusBonusNameAndBonusCompanyCompanyNameAndUserId(
+            String bonusName,
+            String companyName,
+            Long userId
+    );
 }

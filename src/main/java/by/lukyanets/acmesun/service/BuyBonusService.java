@@ -7,4 +7,6 @@ import java.util.List;
 public interface BuyBonusService {
 
     List<BuyBonusDto> findAllBBDtosByUser(String userName);
+
+    void saveBoughtBonus(String bonusName, String companyName);
 }
