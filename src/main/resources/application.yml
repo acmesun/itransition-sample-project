@@ -2,8 +2,8 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
   datasource:
-    url: jdbc:postgresql://localhost:5432/acmesun
-    password: acmesun
-    username: acmesun
+    url:
+    password:
+    username:
 
 
