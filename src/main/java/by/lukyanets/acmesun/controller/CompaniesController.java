@@ -26,8 +26,5 @@ public class CompaniesController {
             @RequestParam(value = "subject") Subject subject) {
         return new ModelAndView("companies", "companies", service.listOfCompaniesBySubject((subject)));
     }
-
-
-
 }
 

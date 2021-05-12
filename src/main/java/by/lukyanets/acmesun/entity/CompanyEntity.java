@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -39,5 +40,8 @@ public class CompanyEntity {
     @OneToMany(cascade = ALL)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private List<ImageEntity> imageList;
+    @OneToMany(mappedBy = "companyEntity")
+    private Set<CompanySubscriptionEntity> subscribers;
+
 
 }

@@ -25,6 +25,8 @@ public interface CompanyService {
 
     boolean isCompanyHasBoughtBonuses(String name);
 
+    void subscribeToTheCompany(String name);
+
 
 
 }

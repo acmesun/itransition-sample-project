@@ -16,7 +16,7 @@ public class CompanyController {
     @GetMapping("/name")
     public ModelAndView displayCompanyByName(
             @RequestParam(value = "text") String name) {
-        return new ModelAndView("company", "company", service. companyInfoByName(name));
+        return new ModelAndView("company", "company", service.companyInfoByName(name));
     }
 
 }

@@ -41,6 +41,12 @@ public class UserController {
         }
     }
 
+    @PostMapping("/subscribe")
+    public ModelAndView subscribe(@RequestParam("name") String name) {
+        companyService.subscribeToTheCompany(name);
+        return displayUserPage();
+    }
+
     @PostMapping("/toAdmin")
     public String toAdmin() {
         return "redirect:/admin";

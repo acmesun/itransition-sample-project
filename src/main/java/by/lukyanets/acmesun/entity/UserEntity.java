@@ -33,4 +33,6 @@ public class UserEntity {
     private List<CompanyEntity> companies;
     @OneToMany(mappedBy = "user")
     private Set<BuyBonusEntity> boughtBonuses;
+    @OneToMany(mappedBy = "user")
+    private Set<CompanySubscriptionEntity> subscriptions;
 }

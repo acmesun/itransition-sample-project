@@ -137,4 +137,30 @@
                              constraintName="unique_bonus_to_user_constraint"/>
     </changeSet>
 
+    <changeSet id="12-05-2021" author="me">
+        <createTable tableName="company_subscription_entity">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="company_subscription_entity"
+                                 baseColumnNames="user_id"
+                                 constraintName="company_subscription_user_fk"
+                                 referencedTableName="user_entity"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="company_subscription_entity"
+                                 baseColumnNames="company_id"
+                                 constraintName="company_subscription_company_fk"
+                                 referencedTableName="company_entity"
+                                 referencedColumnNames="id"/>
+        <addUniqueConstraint tableName="company_subscription_entity"
+                             columnNames="user_id,company_id"
+                             constraintName="unique_user_to_company_constraint"/>
+    </changeSet>
 </databaseChangeLog>

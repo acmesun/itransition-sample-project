@@ -25,7 +25,6 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepo;
-    private final BuyBonusRepository bbonusRepo;
     private final UserRepository userRepo;
     private final CurrentUserService userService;
     private final Cloudinary cloudinary;
@@ -95,6 +94,12 @@ public class CompanyServiceImpl implements CompanyService {
             }
         }
         return counter >= 1;
+    }
+
+    @Override
+    public void subscribeToTheCompany(String name) {
+        CompanyEntity companyEntity = companyRepo.findCompanyEntityByCompanyName(name);
+
     }
 
 
