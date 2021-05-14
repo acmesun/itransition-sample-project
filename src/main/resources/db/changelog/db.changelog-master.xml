@@ -163,4 +163,13 @@
                              columnNames="user_id,campaign_id"
                              constraintName="unique_user_to_campaign_constraint"/>
     </changeSet>
+
+    <changeSet id="2021-05-14-20-40" author="me">
+        <addColumn tableName="user_entity">
+            <column name="source" type="text" defaultValue="APP">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

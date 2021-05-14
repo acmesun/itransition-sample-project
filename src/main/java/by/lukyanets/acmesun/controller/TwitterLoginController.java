@@ -1,10 +1,11 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.dto.user.UserRegistrationTwitterDto;
+import by.lukyanets.acmesun.entity.RegistrationSource;
 import by.lukyanets.acmesun.service.UserService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,21 +51,24 @@ public class TwitterLoginController {
                                   HttpServletRequest request) {
 
         if (denied != null) {
-            return "redirect:/login";
+            throw new IllegalArgumentException("Twitter access denied");
         }
         RequestToken requestToken = (RequestToken) request.getSession().getAttribute(REQUEST_TOKEN_ATTR);
         Twitter twitter = (Twitter) request.getSession().getAttribute(TWITTER_ATTR);
         // Generate access token only to fill user data in twitter entity
         twitter.getOAuthAccessToken(requestToken, oauthVerifier);
         request.getSession().removeAttribute(REQUEST_TOKEN_ATTR);
-        service.registerNewAccount(new UserRegistrationTwitterDto(
+        service.thirdPartyLogin(
                 twitter.getScreenName(),
                 twitter.verifyCredentials().getEmail(),
-                null,
-                null
-        ));
-
+                RegistrationSource.TWITTER
+        );
         return "redirect:/user";
+    }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public String handleIllegalArgument(IllegalArgumentException ex) {
+        return "redirect:/login?error="+ ex.getMessage();
     }
 }
 

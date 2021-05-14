@@ -23,8 +23,6 @@ public class UserEntity {
     private String email;
     @Column
     private String password;
-    @Transient
-    private String matchingPassword;
     @Column
     private String role;
     @Column
@@ -35,4 +33,7 @@ public class UserEntity {
     private Set<BuyBonusEntity> boughtBonuses;
     @OneToMany(mappedBy = "user")
     private Set<CampaignSubscriptionEntity> subscriptions;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private RegistrationSource source;
 }

@@ -1,5 +1,6 @@
 package by.lukyanets.acmesun.service.impl;
 
+import by.lukyanets.acmesun.entity.RegistrationSource;
 import by.lukyanets.acmesun.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +13,6 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-
 public class UserDetailsByEmailService implements UserDetailsService {
     private final UserRepository repo;
 
@@ -23,7 +23,8 @@ public class UserDetailsByEmailService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(
                 userEntity.getEmail(),
-                userEntity.getPassword(),
+                // If registration source is third-party then user does not have password and does not need one.
+                userEntity.getSource() == RegistrationSource.APP ? userEntity.getPassword() : userEntity.getEmail(),
                 userEntity.isActivity(),
                 true,
                 true,

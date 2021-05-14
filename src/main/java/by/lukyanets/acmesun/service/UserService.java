@@ -3,6 +3,7 @@ package by.lukyanets.acmesun.service;
 import by.lukyanets.acmesun.dto.user.UserAdminDto;
 import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
 import by.lukyanets.acmesun.dto.user.UserRegistrationTwitterDto;
+import by.lukyanets.acmesun.entity.RegistrationSource;
 import by.lukyanets.acmesun.entity.UserEntity;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public interface UserService {
     UserEntity registerNewAccount(UserRegistrationDto userDto);
 
-    UserEntity registerNewAccount(UserRegistrationTwitterDto userDto);
+    UserEntity thirdPartyLogin(String name, String email, RegistrationSource source);
 
     void deleteAccount(String email);
 
@@ -19,7 +20,4 @@ public interface UserService {
     List<UserAdminDto> listOfAllUsers();
 
     boolean isUserHasCampaigns(String email);
-
-
-
 }
