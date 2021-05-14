@@ -34,4 +34,4 @@ build/
 .vscode/
 
 ### API key and other secrets
-cloudinary.properties
+secured.properties

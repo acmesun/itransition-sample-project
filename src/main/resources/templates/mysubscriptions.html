@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head :: head"></head>
+<header th:include="navbar::navbar"></header>
+<header th:include="subjectcampaignnavbar::navbar-subject"></header>
+<body>
+<div class="container">
+    <style>
+        .table {
+            vertical-align: middle;
+        }
+    </style>
+    <table class="table table-bordered text-black-100 caption-top">
+        <caption>My Subscriptions</caption>
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Campaign name</th>
+            <th scope="col">Target amount, $</th>
+            <th scope="col">Expiration date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="campaign : ${campaigns}">
+            <td>
+                <a th:href="@{/campaign/name?text=__${campaign.campaignName}__}" class="link link-success"
+                   th:text="${campaign.campaignName}"></a>
+            </td>
+            <td th:text="${campaign.targetAmount}"></td>
+            <td th:text="${campaign.expirationDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<div th:insert="footer :: footer"></div>
+</html>

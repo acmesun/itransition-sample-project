@@ -1,12 +1,10 @@
 package by.lukyanets.acmesun.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -25,8 +23,8 @@ public class BonusEntity {
     @Column
     private String description;
     @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    private CompanyEntity company;
+    @JoinColumn(name = "campaign_id", referencedColumnName = "id")
+    private CampaignEntity campaign;
     @OneToMany(mappedBy = "bonus")
     private Set<BuyBonusEntity> boughtBonuses;
 }

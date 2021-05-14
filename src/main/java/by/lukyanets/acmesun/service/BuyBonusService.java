@@ -1,6 +1,6 @@
 package by.lukyanets.acmesun.service;
 
-import by.lukyanets.acmesun.dto.company.BuyBonusDto;
+import by.lukyanets.acmesun.dto.campaign.BuyBonusDto;
 
 import java.util.List;
 
@@ -8,5 +8,5 @@ public interface BuyBonusService {
 
     List<BuyBonusDto> findAllBBDtosByUser(String userName);
 
-    void saveBoughtBonus(String bonusName, String companyName);
+    void saveBoughtBonus(String bonusName, String campaignName);
 }

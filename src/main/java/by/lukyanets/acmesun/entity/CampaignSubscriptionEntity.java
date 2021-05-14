@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table
-public class CompanySubscriptionEntity {
+public class CampaignSubscriptionEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -19,11 +19,11 @@ public class CompanySubscriptionEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
     @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    private CompanyEntity companyEntity;
+    @JoinColumn(name = "campaign_id", referencedColumnName = "id")
+    private CampaignEntity campaignEntity;
 
-    public CompanySubscriptionEntity(UserEntity user, CompanyEntity companyEntity) {
+    public CampaignSubscriptionEntity(UserEntity user, CampaignEntity campaignEntity) {
         this.user = user;
-        this.companyEntity = companyEntity;
+        this.campaignEntity = campaignEntity;
     }
 }

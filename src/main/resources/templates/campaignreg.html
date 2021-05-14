@@ -1,21 +1,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
-<header th:include="subjectcompanynavbar::navbar-subject"></header>
+<header th:include="subjectcampaignnavbar::navbar-subject"></header>
 <div class="container">
-    <form th:action="@{/companyreg/}" th:object="${company}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/campaignreg/}" th:object="${campaign}" method="post" enctype="multipart/form-data">
         <div class="mb-3 my-2">
-            <label for="companyreg" class="form-label">Company name</label>
-            <input th:field="${company.companyName}" type="text" class="form-control" id="companyreg"
+            <label for="campaignreg" class="form-label">Campaign name</label>
+            <input th:field="${campaign.campaignName}" type="text" class="form-control" id="campaignreg"
                    placeholder="Name">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Describe your company</label>
-            <textarea th:field="${company.companyDescription}" class="form-control" id="description"
+            <textarea th:field="${campaign.campaignDescription}" class="form-control" id="description"
                       rows="3"></textarea>
         </div>
-        <select th:field="${company.subject}" class="form-select" aria-label="subject">
-            <option value=null selected>Choose subject of your company</option>
+        <select th:field="${campaign.subject}" class="form-select" aria-label="subject">
+            <option value=null selected>Choose subject of your campaign</option>
             <option value="EDUCATION">Education</option>
             <option value="IT">IT</option>
             <option value="MEDICINE">Medicine</option>
@@ -25,35 +25,35 @@
         </select>
         <div class="input-group my-2">
             <span class="input-group">Bonus</span>
-            <input type="text" th:field="${company.bonusList[0].bonusName}" aria-label="Bonus name" class="form-control"
+            <input type="text" th:field="${campaign.bonusList[0].bonusName}" aria-label="Bonus name" class="form-control"
                    placeholder="Bonus name">
-            <input type="number" min="1" th:field="${company.bonusList[0].amount}" aria-label="Amount"
+            <input type="number" min="1" th:field="${campaign.bonusList[0].amount}" aria-label="Amount"
                    class="form-control" placeholder="$$$">
-            <textarea class="form-control" th:field="${company.bonusList[0].description}" aria-label="Description"
+            <textarea class="form-control" th:field="${campaign.bonusList[0].description}" aria-label="Description"
                       placeholder="Bonus description"> </textarea>
         </div>
         <div class="input-group my-2">
             <span class="input-group">Bonus</span>
-            <input type="text" th:field="${company.bonusList[1].bonusName}" aria-label="Bonus name" class="form-control"
+            <input type="text" th:field="${campaign.bonusList[1].bonusName}" aria-label="Bonus name" class="form-control"
                    placeholder="Bonus name">
-            <input type="number" min="1" th:field="${company.bonusList[1].amount}" aria-label="Amount"
+            <input type="number" min="1" th:field="${campaign.bonusList[1].amount}" aria-label="Amount"
                    class="form-control" placeholder="$$$">
-            <textarea class="form-control" th:field="${company.bonusList[1].description}" aria-label="Description"
+            <textarea class="form-control" th:field="${campaign.bonusList[1].description}" aria-label="Description"
                       placeholder="Bonus description"> </textarea>
         </div>
         <div class="input-group my-2">
             <span class="input-group">Bonus</span>
-            <input type="text" th:field="${company.bonusList[2].bonusName}" aria-label="Bonus name" class="form-control"
+            <input type="text" th:field="${campaign.bonusList[2].bonusName}" aria-label="Bonus name" class="form-control"
                    placeholder="Bonus name">
-            <input type="number" min="1" th:field="${company.bonusList[2].amount}" aria-label="Amount"
+            <input type="number" min="1" th:field="${campaign.bonusList[2].amount}" aria-label="Amount"
                    class="form-control" placeholder="$$$">
-            <textarea class="form-control" th:field="${company.bonusList[2].description}" aria-label="Description"
+            <textarea class="form-control" th:field="${campaign.bonusList[2].description}" aria-label="Description"
                       placeholder="Bonus description"> </textarea>
         </div>
         <div class="input-group">
-            <input type="number" min="100" th:field="${company.targetAmount}" aria-label="Target amount"
+            <input type="number" min="100" th:field="${campaign.targetAmount}" aria-label="Target amount"
                    class="form-control" placeholder="Target amount, $">
-            <input type="date" th:field="${company.expirationDate}" aria-label="Expiration date" class="form-control"
+            <input type="date" th:field="${campaign.expirationDate}" aria-label="Expiration date" class="form-control"
                    placeholder="Expiration date">
         </div>
         <div class="input-group">

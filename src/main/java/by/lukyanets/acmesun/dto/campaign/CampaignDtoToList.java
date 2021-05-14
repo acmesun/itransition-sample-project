@@ -1,30 +1,24 @@
-package by.lukyanets.acmesun.dto.company;
+package by.lukyanets.acmesun.dto.campaign;
 
-import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.Subject;
-import by.lukyanets.acmesun.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDtoAllInfo {
+public class CampaignDtoToList {
     private Long id;
-    private String companyName;
-    private String companyDescription;
+    private String campaignName;
     private Subject subject;
-    private List<BonusDto> bonusList;
     private Integer targetAmount;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate;
     private String owner;
-    private List<ImageDto> imageList;
-    private Integer currentAmount;
-
 }

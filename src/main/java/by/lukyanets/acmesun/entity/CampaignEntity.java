@@ -16,19 +16,19 @@ import static javax.persistence.CascadeType.ALL;
 @Setter
 @NoArgsConstructor
 @Table
-public class CompanyEntity {
+public class CampaignEntity {
     @Id
     @GeneratedValue
     private Long id;
     @Column
-    private String companyName;
+    private String campaignName;
     @Column
-    private String companyDescription;
+    private String campaignDescription;
     @Column
     @Enumerated(EnumType.STRING)
     private Subject subject;
     @OneToMany(cascade = ALL)
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @JoinColumn(name = "campaign_id", referencedColumnName = "id")
     private List<BonusEntity> bonusList;
     @Column
     private Integer targetAmount;
@@ -38,10 +38,10 @@ public class CompanyEntity {
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private UserEntity owner;
     @OneToMany(cascade = ALL)
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @JoinColumn(name = "campaign_id", referencedColumnName = "id")
     private List<ImageEntity> imageList;
-    @OneToMany(mappedBy = "companyEntity")
-    private Set<CompanySubscriptionEntity> subscribers;
+    @OneToMany(mappedBy = "campaignEntity")
+    private Set<CampaignSubscriptionEntity> subscribers;
 
 
 }

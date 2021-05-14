@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="head :: head"></head>
+<header th:include="navbar::navbar"></header>
+<header th:include="subjectcampaignnavbar::navbar-subject"></header>
+<body>
+<div class="container">
+    <style>
+        .table {
+            vertical-align: middle;
+        }
+    </style>
+    <table class="table table-bordered text-black-100 caption-top">
+        <caption>My Bonuses</caption>
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Bonus name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Campaign name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Investment amount, $</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bonus : ${bonuses}">
+            <td th:text="${bonus.bonusName}"></td>
+            <td th:text="${bonus.bonusDescription}"></td>
+            <td>
+                <a th:href="@{/campaign/name?text=__${bonus.campaignName}__}" class="link link-success"
+                   th:text="${bonus.campaignName}"></a>
+            </td>
+            <td th:text="${bonus.quantity}"></td>
+            <td th:text="${bonus.investmentAmount}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<div th:insert="footer :: footer"></div>
+</html>

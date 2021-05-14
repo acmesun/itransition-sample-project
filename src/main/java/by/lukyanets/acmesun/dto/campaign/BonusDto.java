@@ -1,4 +1,4 @@
-package by.lukyanets.acmesun.dto.company;
+package by.lukyanets.acmesun.dto.campaign;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

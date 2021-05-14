@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import java.util.Map;
 
 @Configuration
-@PropertySource("classpath:/cloudinary.properties")
 public class CloudinaryConfig {
 
     @Bean

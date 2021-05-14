@@ -9,7 +9,7 @@
         <createSequence sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
 
-    <changeSet id="22-04-22-18-58" author="me">
+    <changeSet id="14-05-21-18-58" author="me">
         <createTable tableName="user_entity">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
@@ -21,7 +21,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="password" type="text">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="role" type="text">
                 <constraints nullable="false"/>
@@ -31,15 +31,15 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="27-04-21-17-33" author="me">
-        <createTable tableName="company_entity">
+    <changeSet id="13-05-21-21-03" author="me">
+        <createTable tableName="campaign_entity">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="company_name" type="text">
+            <column name="campaign_name" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="company_description" type="text">
+            <column name="campaign_description" type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="subject" type="text">
@@ -55,21 +55,21 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="company_entity"
+        <addForeignKeyConstraint baseTableName="campaign_entity"
                                  baseColumnNames="owner_id"
-                                 constraintName="company_owner_fk"
+                                 constraintName="campaign_owner_fk"
                                  referencedTableName="user_entity"
                                  referencedColumnNames="id"
                                  onDelete="RESTRICT"
                                  onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="28-04-21-20-58" author="me">
+    <changeSet id="13-05-21-21-04" author="me">
         <createTable tableName="bonus_entity">
             <column name="bonus_id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="company_id" type="bigint"/>
+            <column name="campaign_id" type="bigint"/>
             <column name="bonus_name" type="text">
                 <constraints nullable="true"/>
             </column>
@@ -81,17 +81,17 @@
             </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="bonus_entity"
-                                 baseColumnNames="company_id"
-                                 constraintName="bonus_company_fk"
-                                 referencedTableName="company_entity"
+                                 baseColumnNames="campaign_id"
+                                 constraintName="bonus_campaign_fk"
+                                 referencedTableName="campaign_entity"
                                  referencedColumnNames="id"/>
     </changeSet>
-    <changeSet id="28-04-21-22-44" author="me">
+    <changeSet id="13-05-21-21-05" author="me">
         <createTable tableName="image_entity">
             <column name="image_id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="company_id" type="bigint"/>
+            <column name="campaign_id" type="bigint"/>
             <column name="title" type="text">
                 <constraints nullable="false"/>
             </column>
@@ -100,9 +100,9 @@
             </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="image_entity"
-                                 baseColumnNames="company_id"
-                                 constraintName="image_company_fk"
-                                 referencedTableName="company_entity"
+                                 baseColumnNames="campaign_id"
+                                 constraintName="image_campaign_fk"
+                                 referencedTableName="campaign_entity"
                                  referencedColumnNames="id"/>
     </changeSet>
 
@@ -137,30 +137,30 @@
                              constraintName="unique_bonus_to_user_constraint"/>
     </changeSet>
 
-    <changeSet id="12-05-2021" author="me">
-        <createTable tableName="company_subscription_entity">
+    <changeSet id="13-05-2021-21-05" author="me">
+        <createTable tableName="campaign_subscription_entity">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="company_id" type="bigint">
+            <column name="campaign_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="company_subscription_entity"
+        <addForeignKeyConstraint baseTableName="campaign_subscription_entity"
                                  baseColumnNames="user_id"
-                                 constraintName="company_subscription_user_fk"
+                                 constraintName="campaign_subscription_user_fk"
                                  referencedTableName="user_entity"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="company_subscription_entity"
-                                 baseColumnNames="company_id"
-                                 constraintName="company_subscription_company_fk"
-                                 referencedTableName="company_entity"
+        <addForeignKeyConstraint baseTableName="campaign_subscription_entity"
+                                 baseColumnNames="campaign_id"
+                                 constraintName="campaign_subscription_campaign_fk"
+                                 referencedTableName="campaign_entity"
                                  referencedColumnNames="id"/>
-        <addUniqueConstraint tableName="company_subscription_entity"
-                             columnNames="user_id,company_id"
-                             constraintName="unique_user_to_company_constraint"/>
+        <addUniqueConstraint tableName="campaign_subscription_entity"
+                             columnNames="user_id,campaign_id"
+                             constraintName="unique_user_to_campaign_constraint"/>
     </changeSet>
 </databaseChangeLog>

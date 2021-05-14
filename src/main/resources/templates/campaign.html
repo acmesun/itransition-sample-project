@@ -2,23 +2,23 @@
 <head th:insert="head :: head"></head>
 <body>
 <header th:include="navbar::navbar"></header>
-<header th:include="subjectcompanynavbar::navbar-subject"></header>
+<header th:include="subjectcampaignnavbar::navbar-subject"></header>
 <div class="container col-lg-10 mx-auto">
-    <p class="h1" th:text="${company.companyName}"></p>
+    <p class="h1" th:text="${campaign.campaignName}"></p>
     <p class="lead text-muted">Owner</p>
-    <p class="lead text-muted" th:text="${company.owner}"></p>
+    <p class="lead text-muted" th:text="${campaign.owner}"></p>
     <p class="lead text-muted">Description</p>
-    <p class="lead text-muted" th:text="${company.companyDescription}"></p>
+    <p class="lead text-muted" th:text="${campaign.campaignDescription}"></p>
     <p class="lead text">Target amount</p>
-    <p class="lead text" th:text="${company.targetAmount + '$'}"></p>
+    <p class="lead text" th:text="${campaign.targetAmount + '$'}"></p>
     <p class="lead text-danger">General amount</p>
-    <p class="lead text" th:text="${company.currentAmount + '$'}"></p>
-    <form th:action="@{/user/subscribe?name=__${company.companyName}__}" th:object="${company}" th:method="post" >
+    <p class="lead text" th:text="${campaign.currentAmount + '$'}"></p>
+    <form th:action="@{/user/subscribe?name=__${campaign.campaignName}__}" th:object="${campaign}" th:method="post" >
         <button type="submit" class="btn btn-secondary my-2">Subscribe</button>
     </form>
     <p class="lead text">Bonuses</p>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <div class="col" th:each="bonus : ${company.bonusList}">
+        <div class="col" th:each="bonus : ${campaign.bonusList}">
             <div class="card mb-4 rounded-3 shadow-sm border-primary">
                 <div class="card-header text-body py-3">
                     <p class="lead text" th:text="${bonus.bonusName}"></p>
@@ -32,7 +32,7 @@
                         </li>
                     </ul>
                     <form th:id="${bonus.bonusName}"
-                          th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&company=__${company.companyName}__}"
+                          th:action="@{/bonus/buy?bonus=__${bonus.bonusName}__&campaign=__${campaign.campaignName}__}"
                           method="post">
                         <button class="w-100 btn btn-lg btn-outline-primary"
                                 type="button"
@@ -45,9 +45,9 @@
         </div>
     </div>
 </div>
-<p class="lead text col-lg-10 mx-auto">Company images</p>
+<p class="lead text col-lg-10 mx-auto">Campaign images</p>
 <div class="container row col-lg-10 mx-auto row-cols-md-3">
-    <div class="row" th:each="image : ${company.imageList}">
+    <div class="row" th:each="image : ${campaign.imageList}">
         <div class="col-md-3 col-sm-4 col-xs-6">
             <img th:src="${image.url}" th:width="250" th:height="150" th:hspace="15" th:vspace="15" alt=""/>
         </div>

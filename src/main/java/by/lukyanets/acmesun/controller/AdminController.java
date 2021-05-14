@@ -33,7 +33,7 @@ public class AdminController {
 
     @PostMapping("/delete")
     public ModelAndView deleteUser(@RequestParam("email") String email) {
-        if (userService.isUserHasCompanies(email)) {
+        if (userService.isUserHasCampaigns(email)) {
             return new ModelAndView("redirect:/admin/notdelete");
         } else {
             userService.deleteAccount(email);

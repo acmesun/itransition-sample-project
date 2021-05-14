@@ -1,4 +1,4 @@
-package by.lukyanets.acmesun.dto.company;
+package by.lukyanets.acmesun.dto.campaign;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ public class BuyBonusDto {
     private String bonusName;
     private String userName;
     private Integer quantity;
-    private String companyName;
+    private String campaignName;
     private String bonusDescription;
     private Integer investmentAmount;
 

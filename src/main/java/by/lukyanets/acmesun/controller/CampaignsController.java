@@ -1,30 +1,29 @@
 package by.lukyanets.acmesun.controller;
 
 import by.lukyanets.acmesun.entity.Subject;
-import by.lukyanets.acmesun.service.CompanyService;
+import by.lukyanets.acmesun.service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/companies")
+@RequestMapping("/campaigns")
 @RequiredArgsConstructor
-public class CompaniesController {
-    private final CompanyService service;
+public class CampaignsController {
+    private final CampaignService service;
 
     @GetMapping
-    public ModelAndView displayAllCompaniesView() {
-        return new ModelAndView("companies", "companies", service.listOfAllCompanies());
+    public ModelAndView displayAllCampaignsView() {
+        return new ModelAndView("campaigns", "campaigns", service.listOfAllCampaigns());
     }
 
     @GetMapping("/type")
-    public ModelAndView displayCompaniesViewByType(
+    public ModelAndView displayCampaignsViewByType(
             @RequestParam(value = "subject") Subject subject) {
-        return new ModelAndView("companies", "companies", service.listOfCompaniesBySubject((subject)));
+        return new ModelAndView("campaigns", "campaigns", service.listOfCampaignsBySubject((subject)));
     }
 }
 

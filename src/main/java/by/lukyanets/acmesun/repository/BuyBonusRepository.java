@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface BuyBonusRepository extends JpaRepository<BuyBonusEntity, Long> {
     List<BuyBonusEntity> findBuyBonusEntitiesByUserEmail(String userEmail);
 
-    Optional<BuyBonusEntity> findByBonusBonusNameAndBonusCompanyCompanyNameAndUserId(
+    Optional<BuyBonusEntity> findByBonusBonusNameAndBonusCampaignCampaignNameAndUserId(
             String bonusName,
-            String companyName,
+            String campaignName,
             Long userId
     );
 }

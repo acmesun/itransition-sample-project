@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
 <header th:include="navbar::navbar"></header>
-<header th:include="subjectcompanynavbar::navbar-subject"></header>
+<header th:include="subjectcampaignnavbar::navbar-subject"></header>
 
 <div class="container">
     <style>
@@ -13,11 +13,11 @@
         }
     </style>
     <table class="table table-bordered text-black-100 caption-top">
-        <caption>Companies</caption>
+        <caption>Campaigns</caption>
         <thead class="table-dark">
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Name</th>
+            <th scope="col">Campaign name</th>
             <th scope="col">Subject</th>
             <th scope="col">Target amount</th>
             <th scope="col">Expiration date</th>
@@ -25,15 +25,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="company : ${companies}">
-            <td th:text="${company.id}"></td>
+        <tr th:each="campaign : ${campaigns}">
+            <td th:text="${campaign.id}"></td>
             <td>
-                <a th:href="@{/company/name?text=__${company.companyName}__}" class="link link-success" th:text="${company.companyName}"></a>
+                <a th:href="@{/campaign/name?text=__${campaign.campaignName}__}" class="link link-success" th:text="${campaign.campaignName}"></a>
             </td>
-            <td th:text="${company.subject}"></td>
-            <td th:text="${company.targetAmount}"></td>
-            <td th:text="${company.expirationDate}"></td>
-            <td th:text="${company.owner}"></td>
+            <td th:text="${campaign.subject}"></td>
+            <td th:text="${campaign.targetAmount}"></td>
+            <td th:text="${campaign.expirationDate}"></td>
+            <td th:text="${campaign.owner}"></td>
         </tr>
         </tbody>
     </table>

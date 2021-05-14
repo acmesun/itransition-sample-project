@@ -15,10 +15,10 @@ public class BonusController {
 
     @PostMapping("/buy")
     public String buyBonus(
-            @RequestParam("company") String companyName,
+            @RequestParam("campaign") String campaignName,
             @RequestParam("bonus") String bonusName
     ) {
-        buyBonusService.saveBoughtBonus(bonusName, companyName);
+        buyBonusService.saveBoughtBonus(bonusName, campaignName);
         return "redirect:/user";
     }
 

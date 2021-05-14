@@ -2,10 +2,10 @@ package by.lukyanets.acmesun.service.impl;
 
 import by.lukyanets.acmesun.dto.user.UserAdminDto;
 import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
+import by.lukyanets.acmesun.dto.user.UserRegistrationTwitterDto;
 import by.lukyanets.acmesun.entity.UserEntity;
-import by.lukyanets.acmesun.repository.CompanyRepository;
+import by.lukyanets.acmesun.repository.CampaignRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
-import by.lukyanets.acmesun.service.CompanyService;
 import by.lukyanets.acmesun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +23,7 @@ import static java.util.stream.Collectors.toList;
 public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final CompanyRepository companyRepo;
+    private final CampaignRepository campaignRepo;
     private final CurrentUserService service;
 
     @Override
@@ -36,6 +36,19 @@ public class UserServiceImpl implements UserService {
         userEntity.setActivity(true);
         userEntity.setRole(CLIENT);
         userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setName(userDto.getName());
+        return userRepository.save(userEntity);
+    }
+
+    public UserEntity registerNewAccount(UserRegistrationTwitterDto userDto) {
+        if (userRepository.existsByEmail(userDto.getEmail())) {
+            throw new IllegalArgumentException("There is an account with that email address " + userDto.getEmail());
+        }
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setActivity(true);
+        userEntity.setRole(CLIENT);
         userEntity.setEmail(userDto.getEmail());
         userEntity.setName(userDto.getName());
         return userRepository.save(userEntity);
@@ -68,7 +81,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserHasCompanies(String email) {
-        return companyRepo.findAllByOwnerEmail(email).size() >= 1;
+    public boolean isUserHasCampaigns(String email) {
+        return campaignRepo.findAllByOwnerEmail(email).size() >= 1;
     }
 }

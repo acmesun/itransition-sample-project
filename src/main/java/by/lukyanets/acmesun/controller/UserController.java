@@ -1,9 +1,12 @@
 package by.lukyanets.acmesun.controller;
 
+import by.lukyanets.acmesun.dto.campaign.BuyBonusDto;
+import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.BuyBonusService;
-import by.lukyanets.acmesun.service.CompanyService;
-import by.lukyanets.acmesun.service.impl.CompanySubscriptionService;
+import by.lukyanets.acmesun.service.CampaignService;
+import by.lukyanets.acmesun.service.impl.CampaignSubscriptionService;
 import by.lukyanets.acmesun.service.impl.CurrentUserService;
+import by.lukyanets.acmesun.service.impl.UserDetailsByEmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,34 +15,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-    private final CompanyService companyService;
+    private final CampaignService campaignService;
     private final CurrentUserService userService;
     private final BuyBonusService bonusService;
-    private final CompanySubscriptionService subscriptionService;
+    private final CampaignSubscriptionService subscriptionService;
+
 
     @GetMapping
     public ModelAndView displayUserPage() {
+        return new ModelAndView("user", "user", userService.getCurrentUser().getName());
+    }
+
+    @GetMapping("/mysubscriptions")
+    public ModelAndView displayMySubscriptions() {
         var currentEmail = userService.getCurrentUser().getEmail();
-        return new ModelAndView("user",
-                Map.of(
-                        "bonuses", bonusService.findAllBBDtosByUser(currentEmail),
-                        "companies", companyService.companyInfoByOwner(currentEmail),
-                        "company", subscriptionService.findAllSubscriptions(currentEmail))
-        );
+        return new ModelAndView("mysubscriptions", "campaigns", subscriptionService.findAllSubscriptions(currentEmail));
+    }
+
+    @GetMapping("/mycampaigns")
+    public ModelAndView displayMyCampaigns() {
+        var currentEmail = userService.getCurrentUser().getEmail();
+        return new ModelAndView("mycampaigns", "campaigns", campaignService.campaignInfoByOwner(currentEmail));
+    }
+
+    @GetMapping("/mybonuses")
+    public ModelAndView displayMyBonuses() {
+        var currentEmail = userService.getCurrentUser().getEmail();
+        List<BuyBonusDto> allBBDtosByUser = bonusService.findAllBBDtosByUser(currentEmail);
+        return new ModelAndView("mybonuses", "bonuses", allBBDtosByUser);
     }
 
     @PostMapping("/delete")
-    public ModelAndView deleteCompany(@RequestParam("name") String name) {
-        if (companyService.isCompanyHasBoughtBonuses(name)) {
-            return new ModelAndView("redirect:/user/notdeletecompany");
+    public ModelAndView deleteCampaign(@RequestParam("name") String name) {
+        if (campaignService.isCampaignHasBoughtBonuses(name)) {
+            return new ModelAndView("redirect:/user/notdeletecampaign");
         } else {
-            companyService.deleteCompanyByName(name);
+            campaignService.deleteCampaignByName(name);
             return displayUserPage();
         }
     }
@@ -55,14 +72,14 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/toCompanyReg")
-    public String toCompanyReg() {
-        return "redirect:/companyreg";
+    @PostMapping("/toCampaignReg")
+    public String toCampaignReg() {
+        return "redirect:/campaignreg";
     }
 
-    @PostMapping("/toAllCompanies")
-    public String toAllCompanies() {
-        return "redirect:/companies";
+    @PostMapping("/toAllCampaigns")
+    public String toAllCampaigns() {
+        return "redirect:/campaigns";
     }
 
     @PostMapping("/toMyPage")
@@ -75,8 +92,10 @@ public class UserController {
         return "notadmin";
     }
 
-    @GetMapping("/notdeletecompany")
-    public String notDeleteCompany() {
-        return "notdeletecompany";
+    @GetMapping("/notdeletecampaign")
+    public String notDeleteCampaign() {
+        return "notdeletecampaign";
     }
+
+
 }

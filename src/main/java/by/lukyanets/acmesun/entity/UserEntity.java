@@ -30,9 +30,9 @@ public class UserEntity {
     @Column
     private boolean activity;
     @OneToMany(mappedBy = "owner")
-    private List<CompanyEntity> companies;
+    private List<CampaignEntity> campaigns;
     @OneToMany(mappedBy = "user")
     private Set<BuyBonusEntity> boughtBonuses;
     @OneToMany(mappedBy = "user")
-    private Set<CompanySubscriptionEntity> subscriptions;
+    private Set<CampaignSubscriptionEntity> subscriptions;
 }

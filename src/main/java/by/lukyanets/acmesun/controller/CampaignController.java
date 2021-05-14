@@ -1,8 +1,6 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.service.CompanyService;
-import by.lukyanets.acmesun.service.impl.CompanySubscriptionService;
-import lombok.Getter;
+import by.lukyanets.acmesun.service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/company")
-public class CompanyController {
-    private final CompanyService service;
+@RequestMapping("/campaign")
+public class CampaignController {
+    private final CampaignService service;
 
     @GetMapping("/name")
-    public ModelAndView displayCompanyByName(
+    public ModelAndView displayCampaignByName(
             @RequestParam(value = "text") String name) {
-        return new ModelAndView("company", "company", service.companyInfoByName(name));
+        return new ModelAndView("campaign", "campaign", service.campaignInfoByName(name));
     }
 
 

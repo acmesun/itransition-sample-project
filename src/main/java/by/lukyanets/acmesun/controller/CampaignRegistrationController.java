@@ -1,7 +1,7 @@
 package by.lukyanets.acmesun.controller;
 
-import by.lukyanets.acmesun.dto.company.CompanyDto;
-import by.lukyanets.acmesun.service.CompanyService;
+import by.lukyanets.acmesun.dto.campaign.CampaignDto;
+import by.lukyanets.acmesun.service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,21 +13,21 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/companyreg")
-public class CompanyRegistrationController {
-    private final CompanyService service;
+@RequestMapping("/campaignreg")
+public class CampaignRegistrationController {
+    private final CampaignService service;
 
     @GetMapping
-    public ModelAndView displayCompanyRegistrationPage() {
-        return new ModelAndView("companyreg", "company", new CompanyDto());
+    public ModelAndView displayCampaignRegistrationPage() {
+        return new ModelAndView("campaignreg", "campaign", new CampaignDto());
     }
 
     @PostMapping
-    public void companyRegistration(
-            @ModelAttribute("company") CompanyDto companyDto,
+    public void campaignRegistration(
+            @ModelAttribute("campaign") CampaignDto campaignDto,
             @RequestParam("images") MultipartFile[] images
     ) throws IOException {
-        service.createNewCompany(companyDto, images);
+        service.createNewCampaign(campaignDto, images);
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
