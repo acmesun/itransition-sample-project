@@ -1,53 +1,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
+<body>
 <header th:include="navbar::navbar"></header>
 <header th:include="subjectcampaignnavbar::navbar-subject"></header>
-
 <div class="container">
-        <style>
-            .table {
+    <style>
+        .table {
 
-                table-border-color-dark: #383886;
-                --bs-table-striped-color: #7bcbc3;
-                vertical-align: middle;
-            }
-        </style>
-        <table class="table table-bordered caption-top">
-            <caption>Users</caption>
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Admin</th>
-                <th scope="col">Activity</th>
-                <th scope="col" bgcolor="#dc143c">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.email}"></td>
-                <td>
-                    <form th:action="@{/admin/update?email=__${user.email}__&role=__${user.role == 'ROLE_ADMIN' ? 'ROLE_CLIENT' : 'ROLE_ADMIN'}__}" method="post">
-                    <input onchange="this.form.submit()" class="form-check-input" type="checkbox" th:checked="${user.role == 'ROLE_ADMIN'}">
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/admin/update?email=__${user.email}__&activity=__${!user.activity}__}" method="post">
-                        <input onchange="this.form.submit()" class="form-check-input" type="checkbox" th:checked="${user.activity}">
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/admin/delete?email=__${user.email}__}" method="post">
-                        <button type="submit" class="btn btn-outline-warning">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+            table-border-color-dark: #383886;
+            --bs-table-striped-color: #7bcbc3;
+            vertical-align: middle;
+        }
+    </style>
+    <table class="table table-bordered caption-top">
+        <caption>Users</caption>
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Activity</th>
+            <th scope="col" bgcolor="#dc143c">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <form th:action="@{/admin/update?email=__${user.email}__&role=__${user.role == 'ROLE_ADMIN' ? 'ROLE_CLIENT' : 'ROLE_ADMIN'}__}"
+                      method="post">
+                    <input onchange="this.form.submit()" class="form-check-input" type="checkbox"
+                           th:checked="${user.role == 'ROLE_ADMIN'}">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/update?email=__${user.email}__&activity=__${!user.activity}__}" method="post">
+                    <input onchange="this.form.submit()" class="form-check-input" type="checkbox"
+                           th:checked="${user.activity}">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/delete?email=__${user.email}__}" method="post">
+                    <button type="submit" class="btn btn-outline-warning">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     </form>
 </div>
 <div th:insert="footer :: footer"></div>
+</body>
 </html>

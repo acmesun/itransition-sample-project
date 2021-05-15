@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<body>
 <header th:fragment="navbar-subject">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -22,10 +23,12 @@
                         <a class="nav-link active" type="button" th:href="@{/campaigns/type?subject=IT}">IT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" type="button" th:href="@{/campaigns/type?subject=MEDICINE}">MEDICINE</a>
+                        <a class="nav-link active" type="button"
+                           th:href="@{/campaigns/type?subject=MEDICINE}">MEDICINE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" type="button" th:href="@{/campaigns/type?subject=POLITICS}">POLITICS</a>
+                        <a class="nav-link active" type="button"
+                           th:href="@{/campaigns/type?subject=POLITICS}">POLITICS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" type="button" th:href="@{/campaigns/type?subject=SPORT}">SPORT</a>
@@ -38,3 +41,5 @@
         </div>
     </nav>
 </header>
+</body>
+</html>

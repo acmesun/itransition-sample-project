@@ -1,7 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
-<header th:include="navbar::navbar"></header>
-<header th:include="subjectcampaignnavbar::navbar-subject"></header>
+<body>
 <div class="container">
     <form th:action="@{/campaignreg/}" th:object="${campaign}" method="post" enctype="multipart/form-data">
         <div class="mb-3 my-2">
@@ -25,7 +24,8 @@
         </select>
         <div class="input-group my-2">
             <span class="input-group">Bonus</span>
-            <input type="text" th:field="${campaign.bonusList[0].bonusName}" aria-label="Bonus name" class="form-control"
+            <input type="text" th:field="${campaign.bonusList[0].bonusName}" aria-label="Bonus name"
+                   class="form-control"
                    placeholder="Bonus name">
             <input type="number" min="1" th:field="${campaign.bonusList[0].amount}" aria-label="Amount"
                    class="form-control" placeholder="$$$">
@@ -34,7 +34,8 @@
         </div>
         <div class="input-group my-2">
             <span class="input-group">Bonus</span>
-            <input type="text" th:field="${campaign.bonusList[1].bonusName}" aria-label="Bonus name" class="form-control"
+            <input type="text" th:field="${campaign.bonusList[1].bonusName}" aria-label="Bonus name"
+                   class="form-control"
                    placeholder="Bonus name">
             <input type="number" min="1" th:field="${campaign.bonusList[1].amount}" aria-label="Amount"
                    class="form-control" placeholder="$$$">
@@ -43,7 +44,8 @@
         </div>
         <div class="input-group my-2">
             <span class="input-group">Bonus</span>
-            <input type="text" th:field="${campaign.bonusList[2].bonusName}" aria-label="Bonus name" class="form-control"
+            <input type="text" th:field="${campaign.bonusList[2].bonusName}" aria-label="Bonus name"
+                   class="form-control"
                    placeholder="Bonus name">
             <input type="number" min="1" th:field="${campaign.bonusList[2].amount}" aria-label="Amount"
                    class="form-control" placeholder="$$$">
@@ -65,4 +67,7 @@
     </form>
     <div th:insert="footer :: footer"></div>
 </div>
-
+</body>
+<header th:include="navbar::navbar"></header>
+<header th:include="subjectcampaignnavbar::navbar-subject"></header>
+</html>

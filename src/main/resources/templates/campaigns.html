@@ -1,8 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
+<body>
 <header th:include="navbar::navbar"></header>
 <header th:include="subjectcampaignnavbar::navbar-subject"></header>
-
 <div class="container">
     <style>
         .table {
@@ -28,7 +28,8 @@
         <tr th:each="campaign : ${campaigns}">
             <td th:text="${campaign.id}"></td>
             <td>
-                <a th:href="@{/campaign/name?text=__${campaign.campaignName}__}" class="link link-success" th:text="${campaign.campaignName}"></a>
+                <a th:href="@{/campaign/name?text=__${campaign.campaignName}__}" class="link link-success"
+                   th:text="${campaign.campaignName}"></a>
             </td>
             <td th:text="${campaign.subject}"></td>
             <td th:text="${campaign.targetAmount}"></td>
@@ -39,4 +40,5 @@
     </table>
 </div>
 <div th:insert="footer :: footer"></div>
+</body>
 </html>

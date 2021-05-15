@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="head :: head"></head>
+<body>
 <header th:include="navbar::navbar"></header>
 <header th:include="subjectcampaignnavbar::navbar-subject"></header>
-<body>
 <div class="container col-lg-10 mx-auto">
     <p class="h1" th:text="'Hello, ' + ${user} + '!'"></p>
 </div>
-
 <div th:insert="footer :: footer"></div>
 </body>
+</html>
