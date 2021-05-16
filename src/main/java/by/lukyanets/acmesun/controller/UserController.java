@@ -97,5 +97,8 @@ public class UserController {
         return "notdeletecampaign";
     }
 
-
+    @GetMapping("/campaignexists")
+    public String campaignAlreadyExists() {
+        return "campaignexists";
+    }
 }

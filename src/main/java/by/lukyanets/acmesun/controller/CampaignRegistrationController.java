@@ -25,11 +25,16 @@ public class CampaignRegistrationController {
     }
 
     @PostMapping
-    public void campaignRegistration(
+    public String campaignRegistration(
             @ModelAttribute("campaign") CampaignDto campaignDto,
             @RequestParam("images") MultipartFile[] images
     ) throws IOException {
-        service.createNewCampaign(campaignDto, images);
+        if (!repo.existsByCampaignName(campaignDto.getCampaignName())) {
+            service.createNewCampaign(campaignDto, images);
+            return "redirect:/user/mycampaigns";
+        } else {
+            return "redirect:/user/campaignexists";
+        }
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
@@ -37,5 +42,10 @@ public class CampaignRegistrationController {
         modelMap.addAttribute("file", file);
 
         return "fileUploadView";
+    }
+
+    @GetMapping("/campaignexists")
+    public String campaignAlreadyExists() {
+        return "campaignexists";
     }
 }
