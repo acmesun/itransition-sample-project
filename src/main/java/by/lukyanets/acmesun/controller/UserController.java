@@ -64,7 +64,7 @@ public class UserController {
     @PostMapping("/subscribe")
     public ModelAndView subscribe(@RequestParam("name") String name) {
         subscriptionService.subscribe(name);
-        return displayUserPage();
+        return displayMySubscriptions();
     }
 
     @PostMapping("/toAdmin")
