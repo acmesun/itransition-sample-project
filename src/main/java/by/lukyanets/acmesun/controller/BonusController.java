@@ -19,7 +19,7 @@ public class BonusController {
             @RequestParam("bonus") String bonusName
     ) {
         buyBonusService.saveBoughtBonus(bonusName, campaignName);
-        return "redirect:/user";
+        return "redirect:/user/mybonuses";
     }
 
 }
