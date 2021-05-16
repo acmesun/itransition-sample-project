@@ -1,6 +1,7 @@
 package by.lukyanets.acmesun.controller;
 
 import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
+import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class RegistrationController {
     private final UserService service;
+    private final UserRepository repo;
 
     @GetMapping
     public ModelAndView displayRegistrationForm(
@@ -22,7 +24,9 @@ public class RegistrationController {
 
     @PostMapping
     public String registration(@ModelAttribute("user") UserRegistrationDto dto) {
-        service.registerNewAccount(dto);
+        if (repo.findUserEntityByEmail(dto.getEmail()).isPresent()){
+            return "redirect:/login?error=This email already exists.";
+        } else service.registerNewAccount(dto);
         return "redirect:/login?message=Registration successfully completed!";
     }
 

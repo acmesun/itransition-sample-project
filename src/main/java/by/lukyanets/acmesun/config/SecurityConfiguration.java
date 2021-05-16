@@ -1,7 +1,7 @@
 package by.lukyanets.acmesun.config;
 
 import by.lukyanets.acmesun.service.impl.UserDetailsByEmailService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +24,9 @@ import static by.lukyanets.acmesun.entity.Roles.ADMIN;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsByEmailService service;
+    private final UserDetailsByEmailService service;
 
     @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
@@ -73,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Qualifier("thirdParty")
-    public AuthenticationProvider thirdPartyAuthProvider(UserDetailsByEmailService userDetailsService) {
+    public AuthenticationProvider thirdPartyAuthProvider() {
         return new AbstractUserDetailsAuthenticationProvider() {
             @Override
             protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
@@ -82,7 +82,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             @Override
             protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-                return userDetailsService.loadUserByUsername(username);
+                return service.loadUserByUsername(username);
             }
         };
     }

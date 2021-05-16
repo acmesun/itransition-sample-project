@@ -1,6 +1,7 @@
 package by.lukyanets.acmesun.controller;
 
 import by.lukyanets.acmesun.dto.campaign.CampaignDto;
+import by.lukyanets.acmesun.repository.CampaignRepository;
 import by.lukyanets.acmesun.service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.io.IOException;
 @RequestMapping("/campaignreg")
 public class CampaignRegistrationController {
     private final CampaignService service;
+    private final CampaignRepository repo;
 
     @GetMapping
     public ModelAndView displayCampaignRegistrationPage() {

@@ -47,7 +47,7 @@ public class AdminController {
     }
 
     private boolean isCurrent(String email) {
-        return currentUserService.getCurrentUser().getName().equals(email);
+        return currentUserService.getCurrentUser().getEmail().equals(email);
 
     }
 }

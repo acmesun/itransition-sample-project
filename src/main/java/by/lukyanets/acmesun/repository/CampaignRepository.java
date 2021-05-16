@@ -16,5 +16,4 @@ public interface CampaignRepository extends JpaRepository<CampaignEntity, Long> 
     CampaignEntity findCampaignEntityByCampaignName(String name);
 
     List<CampaignEntity> findAllByOwnerEmail(String email);
-
 }

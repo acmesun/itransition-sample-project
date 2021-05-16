@@ -2,7 +2,6 @@ package by.lukyanets.acmesun.service;
 
 import by.lukyanets.acmesun.dto.user.UserAdminDto;
 import by.lukyanets.acmesun.dto.user.UserRegistrationDto;
-import by.lukyanets.acmesun.dto.user.UserRegistrationTwitterDto;
 import by.lukyanets.acmesun.entity.RegistrationSource;
 import by.lukyanets.acmesun.entity.UserEntity;
 

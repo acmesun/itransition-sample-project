@@ -24,5 +24,4 @@ public interface CampaignService {
     void deleteCampaignByName(String name);
 
     boolean isCampaignHasBoughtBonuses(String name);
-
 }

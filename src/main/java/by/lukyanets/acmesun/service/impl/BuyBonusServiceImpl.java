@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BuyBonusServiceImpl implements BuyBonusService {
     private final BuyBonusRepository buyBonusRepo;
-    private final CampaignRepository campaignRepository;
+    private final CampaignRepository campaignRepo;
     private final CurrentUserService userService;
 
 
@@ -49,7 +49,7 @@ public class BuyBonusServiceImpl implements BuyBonusService {
     }
 
     private BuyBonusEntity createNewBuyBonus(String bonusName, String campaignName, UserEntity currentUser) {
-        var campaign = campaignRepository.findCampaignEntityByCampaignName(campaignName);
+        var campaign = campaignRepo.findCampaignEntityByCampaignName(campaignName);
         var bonus = campaign.getBonusList().stream()
                 .filter(it -> it.getBonusName().equals(bonusName))
                 .findAny()

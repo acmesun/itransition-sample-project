@@ -7,13 +7,13 @@ import by.lukyanets.acmesun.dto.campaign.CampaignDtoToList;
 import by.lukyanets.acmesun.dto.image.ImageDto;
 import by.lukyanets.acmesun.entity.*;
 import by.lukyanets.acmesun.repository.CampaignRepository;
-import by.lukyanets.acmesun.repository.CampaignSubscriptionRepository;
 import by.lukyanets.acmesun.repository.UserRepository;
 import by.lukyanets.acmesun.service.CampaignService;
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityExistsException;
@@ -22,11 +22,11 @@ import java.util.*;
 import static java.util.stream.Collectors.toList;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CampaignServiceImpl implements CampaignService {
     private final CampaignRepository campaignRepo;
     private final UserRepository userRepo;
-    private final CampaignSubscriptionRepository subscriptionRepo;
     private final CurrentUserService userService;
     private final Cloudinary cloudinary;
 

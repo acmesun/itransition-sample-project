@@ -24,7 +24,7 @@ import static java.util.stream.Collectors.toList;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    private final UserRepository userRepo;
     private final CampaignRepository campaignRepo;
     private final AuthenticationProvider provider;
 
@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService {
                            CampaignRepository campaignRepo,
                            @Qualifier("thirdParty") AuthenticationProvider provider) {
         this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
+        this.userRepo = userRepository;
         this.campaignRepo = campaignRepo;
         this.provider = provider;
     }
 
     @Override
     public UserEntity registerNewAccount(UserRegistrationDto userDto) {
-        if (userRepository.existsByEmail(userDto.getEmail())) {
+        if (userRepo.existsByEmail(userDto.getEmail())) {
             throw new IllegalArgumentException("There is an account with that email address " + userDto.getEmail());
         }
 
@@ -51,12 +51,12 @@ public class UserServiceImpl implements UserService {
         userEntity.setEmail(userDto.getEmail());
         userEntity.setName(userDto.getName());
         userEntity.setSource(RegistrationSource.APP);
-        return userRepository.save(userEntity);
+        return userRepo.save(userEntity);
     }
 
     @Override
     public UserEntity thirdPartyLogin(String name, String email, RegistrationSource source) {
-        UserEntity user = userRepository.findUserEntityByEmail(email).orElse(null);
+        UserEntity user = userRepo.findUserEntityByEmail(email).orElse(null);
         if (user != null && user.getSource() != source) {
             throw new IllegalArgumentException("User is allowed to login only via " + user.getSource());
         }
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
             userEntity.setEmail(email);
             userEntity.setName(name);
             userEntity.setSource(source);
-            user = userRepository.save(userEntity);
+            user = userRepo.save(userEntity);
         }
         var auth = provider.authenticate(new UsernamePasswordAuthenticationToken(email, email));
         SecurityContextHolder.getContext().setAuthentication(auth);
@@ -76,12 +76,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteAccount(String email) {
-        userRepository.findUserEntityByEmail(email).ifPresent(userRepository::delete);
+        userRepo.findUserEntityByEmail(email).ifPresent(userRepo::delete);
     }
 
     @Override
     public void updateUser(String email, String newRole, Boolean newActivity) {
-        userRepository.findUserEntityByEmail(email)
+        userRepo.findUserEntityByEmail(email)
                 .map(userEntity -> {
                     if (newRole != null) {
                         userEntity.setRole(newRole);
@@ -90,12 +90,12 @@ public class UserServiceImpl implements UserService {
                         userEntity.setActivity(newActivity);
                     }
                     return userEntity;
-                }).ifPresent(userRepository::save);
+                }).ifPresent(userRepo::save);
     }
 
     @Override
     public List<UserAdminDto> listOfAllUsers() {
-        return userRepository.findAllByOrderByNameAsc().stream()
+        return userRepo.findAllByOrderByNameAsc().stream()
                 .map(entity -> new UserAdminDto(entity.getId(), entity.getName(), entity.getEmail(), entity.getRole(), entity.isActivity()))
                 .collect(toList());
     }
